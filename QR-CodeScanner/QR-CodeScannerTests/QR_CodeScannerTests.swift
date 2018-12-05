@@ -2,7 +2,7 @@
 //  QR_CodeScannerTests.swift
 //  QR-CodeScannerTests
 //
-//  Created by WangXinyin on 2018/11/28.
+//  Created by WangXinyin,Zhangyun on 2018/11/28.
 //  Copyright © 2018年 QRteam. All rights reserved.
 //
 

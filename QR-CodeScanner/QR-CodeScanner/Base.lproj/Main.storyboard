@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -14,8 +14,8 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="QR_CodeScanner" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="view">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello world!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f19-7D-XvW">
@@ -33,13 +33,60 @@
                                     <action selector="Clickmethod:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vQn-38-ZQs"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="fM8-Cd-3Ja">
+                                <rect key="frame" x="9" y="687" width="357" height="116"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CsU-th-nlL">
+                                        <rect key="frame" x="0.0" y="-623" width="357" height="1362"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x0U-Ta-Ho0">
+                                        <rect key="frame" x="148.66666666666666" y="28" width="60" height="60"/>
+                                        <color key="backgroundColor" red="1" green="0.1764705882352941" blue="0.10588235294117647" alpha="0.84999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="21k-c0-biu"/>
+                                            <constraint firstAttribute="width" constant="60" id="QxU-uq-4EY"/>
+                                        </constraints>
+                                        <state key="normal" image="cross">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="createButtonClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mpe-XN-0L0"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="CsU-th-nlL" secondAttribute="bottom" constant="-623" id="FeU-GQ-naG"/>
+                                    <constraint firstItem="x0U-Ta-Ho0" firstAttribute="centerX" secondItem="fM8-Cd-3Ja" secondAttribute="centerX" id="JT6-XF-BgR"/>
+                                    <constraint firstAttribute="trailing" secondItem="CsU-th-nlL" secondAttribute="trailing" id="Rvk-Do-0Me"/>
+                                    <constraint firstItem="CsU-th-nlL" firstAttribute="leading" secondItem="fM8-Cd-3Ja" secondAttribute="leading" id="c9p-g2-mqr"/>
+                                    <constraint firstItem="CsU-th-nlL" firstAttribute="top" secondItem="fM8-Cd-3Ja" secondAttribute="top" constant="-623" id="cEG-CI-gYI"/>
+                                    <constraint firstItem="x0U-Ta-Ho0" firstAttribute="centerY" secondItem="fM8-Cd-3Ja" secondAttribute="centerY" id="m2x-8b-Ptl"/>
+                                    <constraint firstAttribute="height" constant="116" id="shb-JG-u8R"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="fM8-Cd-3Ja" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="9" id="EP4-O7-VnO"/>
+                            <constraint firstAttribute="bottom" secondItem="fM8-Cd-3Ja" secondAttribute="bottom" constant="9" id="ebN-Vj-Aib"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fM8-Cd-3Ja" secondAttribute="trailing" constant="9" id="hoo-in-YPK"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="cBackground" destination="CsU-th-nlL" id="Kf1-Cx-yf0"/>
+                        <outlet property="createButton" destination="x0U-Ta-Ho0" id="1pM-qr-ALe"/>
+                        <outlet property="ubBackGround" destination="fM8-Cd-3Ja" id="pdO-w7-YrZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="56.799999999999997" y="20.689655172413794"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cross" width="13" height="13"/>
+    </resources>
 </document>

@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  QR-CodeScanner
 //
-//  Created by WangXinyin on 2018/11/28.
+//  Created by WangXinyin,Zhang on 2018/11/28.
 //  Copyright © 2018年 QRteam. All rights reserved.
 //
 
