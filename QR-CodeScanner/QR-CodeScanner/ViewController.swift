@@ -16,15 +16,14 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var createButton: UIButton!
     
+    @IBOutlet weak var pictureButton: UIButton!
     @IBOutlet weak var cBackground: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         ubBackGround.layer.cornerRadius = 30
         createButton.layer.cornerRadius = createButton.frame.size.width / 2
-        createButton.contentVerticalAlignment = .fill
-        createButton.contentHorizontalAlignment = .fill
-        createButton.imageEdgeInsets = UIEdgeInsets.init(top: createButton.frame.size.width / 3 , left: createButton.frame.size.width / 3, bottom: createButton.frame.size.width / 3, right: createButton.frame.size.width / 3)
+        
         cBackground.layer.cornerRadius = 30
         cBackground.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
     }

@@ -36,6 +36,23 @@
                             <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="fM8-Cd-3Ja">
                                 <rect key="frame" x="9" y="687" width="357" height="116"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ON-5j-G62" userLabel="Picture Button">
+                                        <rect key="frame" x="25" y="36" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="8Hj-AK-gPB"/>
+                                            <constraint firstAttribute="height" constant="44" id="frd-kF-VQ8"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <state key="normal" image="picture"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XF5-vg-cOc" userLabel="Camera Button">
+                                        <rect key="frame" x="81.666666666666671" y="36" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="BO0-H3-ubM"/>
+                                            <constraint firstAttribute="width" constant="44" id="JGp-aU-7Ho"/>
+                                        </constraints>
+                                        <state key="normal" image="camera"/>
+                                    </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CsU-th-nlL">
                                         <rect key="frame" x="0.0" y="-623" width="357" height="1362"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -57,11 +74,15 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="3ON-5j-G62" firstAttribute="leading" secondItem="fM8-Cd-3Ja" secondAttribute="leading" constant="25" id="6F4-QS-nby"/>
+                                    <constraint firstItem="x0U-Ta-Ho0" firstAttribute="leading" secondItem="XF5-vg-cOc" secondAttribute="trailing" constant="23" id="7hf-Uz-Tdi"/>
                                     <constraint firstAttribute="bottom" secondItem="CsU-th-nlL" secondAttribute="bottom" constant="-623" id="FeU-GQ-naG"/>
                                     <constraint firstItem="x0U-Ta-Ho0" firstAttribute="centerX" secondItem="fM8-Cd-3Ja" secondAttribute="centerX" id="JT6-XF-BgR"/>
                                     <constraint firstAttribute="trailing" secondItem="CsU-th-nlL" secondAttribute="trailing" id="Rvk-Do-0Me"/>
                                     <constraint firstItem="CsU-th-nlL" firstAttribute="leading" secondItem="fM8-Cd-3Ja" secondAttribute="leading" id="c9p-g2-mqr"/>
                                     <constraint firstItem="CsU-th-nlL" firstAttribute="top" secondItem="fM8-Cd-3Ja" secondAttribute="top" constant="-623" id="cEG-CI-gYI"/>
+                                    <constraint firstItem="3ON-5j-G62" firstAttribute="centerY" secondItem="fM8-Cd-3Ja" secondAttribute="centerY" id="d7n-GI-xzy"/>
+                                    <constraint firstItem="XF5-vg-cOc" firstAttribute="centerY" secondItem="fM8-Cd-3Ja" secondAttribute="centerY" id="eb7-24-dBS"/>
                                     <constraint firstItem="x0U-Ta-Ho0" firstAttribute="centerY" secondItem="fM8-Cd-3Ja" secondAttribute="centerY" id="m2x-8b-Ptl"/>
                                     <constraint firstAttribute="height" constant="116" id="shb-JG-u8R"/>
                                 </constraints>
@@ -78,6 +99,7 @@
                     <connections>
                         <outlet property="cBackground" destination="CsU-th-nlL" id="Kf1-Cx-yf0"/>
                         <outlet property="createButton" destination="x0U-Ta-Ho0" id="1pM-qr-ALe"/>
+                        <outlet property="pictureButton" destination="3ON-5j-G62" id="6sI-3l-Aac"/>
                         <outlet property="ubBackGround" destination="fM8-Cd-3Ja" id="pdO-w7-YrZ"/>
                     </connections>
                 </viewController>
@@ -87,6 +109,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cross" width="13" height="13"/>
+        <image name="camera" width="41" height="41"/>
+        <image name="cross" width="25.666666030883789" height="25.666666030883789"/>
+        <image name="picture" width="36" height="36"/>
     </resources>
 </document>
