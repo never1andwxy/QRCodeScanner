@@ -15,7 +15,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var ubBackGround: UIView!
     
     @IBOutlet weak var createButton: UIButton!
+    @IBOutlet weak var activeIndicator: UIButton!
     
+    @IBOutlet weak var pBackGround: UIView!
+    
+    @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var historyButton: UIButton!
+    @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var pictureButton: UIButton!
     @IBOutlet weak var cBackground: UIView!
     override func viewDidLoad() {
@@ -24,8 +30,25 @@ class ViewController: UIViewController {
         ubBackGround.layer.cornerRadius = 30
         createButton.layer.cornerRadius = createButton.frame.size.width / 2
         
+        activeIndicator.layer.cornerRadius = activeIndicator.frame.size.width / 2
+        
         cBackground.layer.cornerRadius = 30
         cBackground.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        pBackGround.layer.cornerRadius = 30
+       
+        
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        setAnchorPoint(anchorPoint: CGPoint(x:0.5, y:1),view: pBackGround)
+        pBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
+        pBackGround.center.y = self.view.frame.size.height - 50
+        
+        
+        
     }
     
     
@@ -42,13 +65,61 @@ class ViewController: UIViewController {
             //closed
             self.cBackground.transform = .identity
             self.createButton.transform = CGAffineTransform(rotationAngle: 45 * ( .pi / 180) )
-            self.createButton.backgroundColor = UIColor(red: 0.6863, green: 0.0902, blue: 0, alpha: 1.0)
+            self.createButton.backgroundColor = UIColor.gray
         }
         
         })
     }
     
+    @IBAction func pictureButtonClick(_ sender: UIButton) {
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            
+          self.activeIndicator.center.x = self.pictureButton.center.x
+            self.pBackGround.transform = .identity
+            
+        })
+    }
+    
+    
+    @IBAction func cameraButtonClick(_ sender: UIButton) {
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            
+            self.activeIndicator.center.x = self.cameraButton.center.x
+            
+            self.pBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
+            
+        })
+        
+    }
+    
+   
+    @IBAction func historyButtonClick(_ sender: UIButton) {
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            
+            self.activeIndicator.center.x = self.historyButton.center.x
+            
+        })
+        
+    }
+    
+    
+    
+    
     @IBAction func Clickmethod(_ sender: Any) {let alertController = UIAlertController(title: "iOScreator", message: "Hello, world!", preferredStyle: UIAlertController.Style.alert); alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default,handler: nil)); self.present(alertController, animated: true, completion: nil) }
     
+}
+
+
+func setAnchorPoint(anchorPoint: CGPoint, view: UIView) {
+    let oldOrigin = view.frame.origin
+    view.layer.anchorPoint = anchorPoint
+    let newOrigin = view.frame.origin
+    
+    let transition = CGPoint(x: newOrigin.x - oldOrigin.x, y: newOrigin.y - oldOrigin.y)
+    
+    view.center = CGPoint(x: view.center.x - transition.x, y: view.center.y - transition.y)
 }
 
