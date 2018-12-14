@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var activeIndicator: UIButton!
     
+    @IBOutlet weak var hBackGround: UIView!
     @IBOutlet weak var pBackGround: UIView!
     
     @IBOutlet weak var settingsButton: UIButton!
@@ -35,7 +36,8 @@ class ViewController: UIViewController {
         cBackground.layer.cornerRadius = 30
         cBackground.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
         pBackGround.layer.cornerRadius = 30
-       
+        hBackGround.layer.cornerRadius = 30
+       cBackground.alpha = 0
         
         
         
@@ -45,28 +47,44 @@ class ViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         setAnchorPoint(anchorPoint: CGPoint(x:0.5, y:1),view: pBackGround)
+        setAnchorPoint(anchorPoint: CGPoint(x:0.5, y:1),view: hBackGround)
         pBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
+        hBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
         pBackGround.center.y = self.view.frame.size.height - 50
+        hBackGround.center.y = self.view.frame.size.height - 50
         
         
         
     }
     
     
+    
+    @IBAction func settingsButtonClick(_ sender: UIButton) {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        if let secondVC = sb.instantiateViewController(withIdentifier: "SettingsVC") as? ViewControllerSettings{
+            self.present(secondVC, animated: true, completion: nil)
+            
+        }
+        
+        
+    }
+    
     @IBAction func createButtonClick(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
         if self.cBackground.transform == .identity
         {
             //opened
             self.createButton.transform = .identity
             self.createButton.backgroundColor = UIColor(red: 1, green: 0.1765, blue: 0.1059, alpha: 1.0)
             self.cBackground.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+            self.cBackground.alpha = 0
         }
         else{
             //closed
             self.cBackground.transform = .identity
             self.createButton.transform = CGAffineTransform(rotationAngle: 45 * ( .pi / 180) )
             self.createButton.backgroundColor = UIColor.gray
+            self.cBackground.alpha = 1
         }
         
         })
@@ -78,6 +96,8 @@ class ViewController: UIViewController {
             
           self.activeIndicator.center.x = self.pictureButton.center.x
             self.pBackGround.transform = .identity
+            
+            self.hBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
             
         })
     }
@@ -91,6 +111,8 @@ class ViewController: UIViewController {
             
             self.pBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
             
+            self.hBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
+            
         })
         
     }
@@ -102,16 +124,17 @@ class ViewController: UIViewController {
             
             self.activeIndicator.center.x = self.historyButton.center.x
             
+            self.pBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
+            
+            self.hBackGround.transform = .identity
+            
         })
         
     }
     
     
+
     
-    
-    @IBAction func Clickmethod(_ sender: Any) {let alertController = UIAlertController(title: "iOScreator", message: "Hello, world!", preferredStyle: UIAlertController.Style.alert); alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default,handler: nil)); self.present(alertController, animated: true, completion: nil) }
-    
-}
 
 
 func setAnchorPoint(anchorPoint: CGPoint, view: UIView) {
@@ -124,3 +147,4 @@ func setAnchorPoint(anchorPoint: CGPoint, view: UIView) {
     view.center = CGPoint(x: view.center.x - transition.x, y: view.center.y - transition.y)
 }
 
+}

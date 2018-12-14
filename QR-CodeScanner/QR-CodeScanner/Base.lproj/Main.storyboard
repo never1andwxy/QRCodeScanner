@@ -13,31 +13,23 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="QR_CodeScanner" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Main" id="BYZ-38-t0r" customClass="ViewController" customModule="QR_CodeScanner" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" userLabel="view">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5vr-2a-vO7">
-                                <rect key="frame" x="171" y="433" width="73" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Click me!!!"/>
-                                <connections>
-                                    <action selector="Clickmethod:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vQn-38-ZQs"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello world!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f19-7D-XvW">
-                                <rect key="frame" x="162" y="369" width="91" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qQg-MB-Lvz" userLabel="PBackground">
                                 <rect key="frame" x="9" y="75" width="357" height="663"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="1" alpha="0.8966984160958904" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="663" id="VY7-uh-7QT"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Jd-Bh-uzf" userLabel="HBackground">
+                                <rect key="frame" x="9" y="75" width="357" height="663"/>
+                                <color key="backgroundColor" white="1" alpha="0.89608304794520544" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="663" id="EuU-Rd-9W4"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="fM8-Cd-3Ja">
@@ -95,6 +87,9 @@
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="settings"/>
+                                        <connections>
+                                            <action selector="settingsButtonClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CzY-ch-YB9"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CsU-th-nlL">
                                         <rect key="frame" x="0.0" y="-623" width="357" height="1362"/>
@@ -140,11 +135,14 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="fM8-Cd-3Ja" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="9" id="EP4-O7-VnO"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9Jd-Bh-uzf" secondAttribute="bottom" constant="40" id="ICo-yh-Xmk"/>
                             <constraint firstItem="qQg-MB-Lvz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="9" id="Tiu-Nv-yPU"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qQg-MB-Lvz" secondAttribute="trailing" constant="9" id="Vez-9x-mRA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qQg-MB-Lvz" secondAttribute="bottom" constant="40" id="WBa-bx-KFF"/>
+                            <constraint firstItem="9Jd-Bh-uzf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="9" id="bP7-R8-t5b"/>
                             <constraint firstAttribute="bottom" secondItem="fM8-Cd-3Ja" secondAttribute="bottom" constant="9" id="ebN-Vj-Aib"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fM8-Cd-3Ja" secondAttribute="trailing" constant="9" id="hoo-in-YPK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9Jd-Bh-uzf" secondAttribute="trailing" constant="9" id="uQS-yp-5fM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -153,6 +151,7 @@
                         <outlet property="cBackground" destination="CsU-th-nlL" id="Kf1-Cx-yf0"/>
                         <outlet property="cameraButton" destination="XF5-vg-cOc" id="gHx-QA-t9m"/>
                         <outlet property="createButton" destination="x0U-Ta-Ho0" id="1pM-qr-ALe"/>
+                        <outlet property="hBackGround" destination="9Jd-Bh-uzf" id="EtN-lU-jpf"/>
                         <outlet property="historyButton" destination="K1S-4k-hsc" id="m59-HL-nFn"/>
                         <outlet property="pBackGround" destination="qQg-MB-Lvz" id="Bgv-pv-2mw"/>
                         <outlet property="pictureButton" destination="3ON-5j-G62" id="6sI-3l-Aac"/>
@@ -164,8 +163,44 @@
             </objects>
             <point key="canvasLocation" x="56.799999999999997" y="20.689655172413794"/>
         </scene>
+        <!--View Controller Settings-->
+        <scene sceneID="jIv-3d-HKM">
+            <objects>
+                <viewController storyboardIdentifier="SettingsVC" id="eBZ-nw-DuB" customClass="ViewControllerSettings" customModule="QR_CodeScanner" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mTZ-dQ-3Iu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YCe-mw-pYB">
+                                <rect key="frame" x="26" y="57" width="42" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="42" id="l4l-bi-ZQA"/>
+                                    <constraint firstAttribute="height" constant="42" id="vTf-0E-zDv"/>
+                                </constraints>
+                                <state key="normal" image="back"/>
+                                <connections>
+                                    <action selector="backButtonClick:" destination="eBZ-nw-DuB" eventType="touchUpInside" id="AMP-d8-Kjq"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="YCe-mw-pYB" firstAttribute="leading" secondItem="3Bs-vh-8n9" secondAttribute="leading" constant="26" id="RxT-vG-xB1"/>
+                            <constraint firstItem="YCe-mw-pYB" firstAttribute="top" secondItem="3Bs-vh-8n9" secondAttribute="top" constant="13" id="cMC-eB-4Ii"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3Bs-vh-8n9"/>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="YCe-mw-pYB" id="GoU-e0-7LC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dzk-iU-01u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="764" y="20"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="back" width="42" height="42"/>
         <image name="camera" width="41" height="41"/>
         <image name="cross" width="25.666666030883789" height="25.666666030883789"/>
         <image name="history" width="36" height="36"/>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B10F6FC21C3FE5400B3ED7C /* ViewControllerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10F6FB21C3FE5400B3ED7C /* ViewControllerSettings.swift */; };
 		94FD3DEC21AEB541008DE5FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FD3DEB21AEB541008DE5FE /* AppDelegate.swift */; };
 		94FD3DEE21AEB541008DE5FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FD3DED21AEB541008DE5FE /* ViewController.swift */; };
 		94FD3DF121AEB541008DE5FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94FD3DEF21AEB541008DE5FE /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B10F6FB21C3FE5400B3ED7C /* ViewControllerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerSettings.swift; sourceTree = "<group>"; };
 		94FD3DE821AEB541008DE5FE /* QR-CodeScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QR-CodeScanner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94FD3DEB21AEB541008DE5FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94FD3DED21AEB541008DE5FE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				94FD3DEB21AEB541008DE5FE /* AppDelegate.swift */,
 				94FD3DED21AEB541008DE5FE /* ViewController.swift */,
 				94FD3DEF21AEB541008DE5FE /* Main.storyboard */,
+				1B10F6FB21C3FE5400B3ED7C /* ViewControllerSettings.swift */,
 				94FD3DF221AEB543008DE5FE /* Assets.xcassets */,
 				94FD3DF421AEB543008DE5FE /* LaunchScreen.storyboard */,
 				94FD3DF721AEB543008DE5FE /* Info.plist */,
@@ -258,6 +261,7 @@
 			files = (
 				94FD3DEE21AEB541008DE5FE /* ViewController.swift in Sources */,
 				94FD3DEC21AEB541008DE5FE /* AppDelegate.swift in Sources */,
+				1B10F6FC21C3FE5400B3ED7C /* ViewControllerSettings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
