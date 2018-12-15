@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavigationControllerDelegate {
     
     //MARK:properties
     
@@ -25,6 +25,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var pictureButton: UIButton!
     @IBOutlet weak var cBackground: UIView!
+    
+    var imagePicker:UIImagePickerController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -91,6 +94,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func pictureButtonClick(_ sender: UIButton) {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .photoLibrary
+            
+        }else{
+            print("读取相册错误")
+        }
+        self.addChild(imagePicker)
+        self.pBackGround.addSubview(imagePicker.view)
         
         UIView.animate(withDuration: 0.3, animations: {
             
