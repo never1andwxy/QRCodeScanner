@@ -42,8 +42,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
         hBackGround.layer.cornerRadius = 30
         cBackground.alpha = 0
         
-        
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -94,6 +92,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
     }
     
     @IBAction func pictureButtonClick(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.3, animations: {
+            
+            self.activeIndicator.center.x = self.pictureButton.center.x
+            self.pBackGround.transform = .identity
+            
+            self.hBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
+            
+        })
+        
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
             imagePicker = UIImagePickerController()
             imagePicker.delegate = self
@@ -116,14 +123,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
         CardView.addSubview(imagePicker.view)
         self.pBackGround.addSubview(CardView)
         
-        UIView.animate(withDuration: 0.3, animations: {
-            
-          self.activeIndicator.center.x = self.pictureButton.center.x
-            self.pBackGround.transform = .identity
-            
-            self.hBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
-            
-        })
     }
     
     
