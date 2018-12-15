@@ -40,7 +40,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
         cBackground.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
         pBackGround.layer.cornerRadius = 30
         hBackGround.layer.cornerRadius = 30
-       cBackground.alpha = 0
+        cBackground.alpha = 0
         
         
         
@@ -98,12 +98,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
             imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary
+            imagePicker.view.frame = CGRect.init(x: 0, y: 0, width: pBackGround.frame.size.width, height: pBackGround.frame.size.height);
             
         }else{
             print("读取相册错误")
         }
         self.addChild(imagePicker)
-        self.pBackGround.addSubview(imagePicker.view)
+        let CardView = UIView(frame: CGRect(x: 0, y: 0, width: pBackGround.frame.size.width, height: pBackGround.frame.size.height))
+        CardView.layer.cornerRadius = 30
+        CardView.addSubview(imagePicker.view)
+        self.pBackGround.addSubview(CardView)
         
         UIView.animate(withDuration: 0.3, animations: {
             
