@@ -97,15 +97,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
             imagePicker = UIImagePickerController()
             imagePicker.delegate = self
-            imagePicker.sourceType = .photoLibrary
-            imagePicker.view.frame = CGRect.init(x: 0, y: 0, width: pBackGround.frame.size.width, height: pBackGround.frame.size.height);
+            imagePicker.sourceType = .savedPhotosAlbum
+            
             
         }else{
             print("读取相册错误")
         }
         self.addChild(imagePicker)
-        let CardView = UIView(frame: CGRect(x: 0, y: 0, width: pBackGround.frame.size.width, height: pBackGround.frame.size.height))
-        CardView.layer.cornerRadius = 30
+        let CardView = UIView(frame: CGRect(x: 5, y: 5, width: pBackGround.frame.size.width - 10, height: pBackGround.frame.size.height))
+        
+        CardView.layer.cornerRadius = 25
+        CardView.backgroundColor = UIColor(white: 1, alpha: 1)
+        CardView.clipsToBounds = true
+        
+        imagePicker.navigationBar.isHidden = true
+        imagePicker.view.frame = CGRect.init(x: 0, y: 0, width: CardView.frame.size.width , height: CardView.frame.size.height - 80);
+        
         CardView.addSubview(imagePicker.view)
         self.pBackGround.addSubview(CardView)
         
