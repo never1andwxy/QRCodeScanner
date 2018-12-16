@@ -28,6 +28,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
     
     var imagePicker:UIImagePickerController!
     
+    //1:Picture 2:Camera 3:Create 4:History 5:Setting
+    var appStatus = 2
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -41,6 +45,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
         pBackGround.layer.cornerRadius = 30
         hBackGround.layer.cornerRadius = 30
         cBackground.alpha = 0
+        
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
+            imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .savedPhotosAlbum
+            
+        }else{
+            print("读取相册错误")
+        }
+        self.addChild(imagePicker)
+        imagePicker.navigationBar.isHidden = true
         
     }
     
@@ -59,104 +74,99 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
     }
     
     
-    
-    @IBAction func settingsButtonClick(_ sender: UIButton) {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        if let secondVC = sb.instantiateViewController(withIdentifier: "SettingsVC") as? ViewControllerSettings{
-            self.present(secondVC, animated: true, completion: nil)
-            
-        }
-        
-        
-    }
-    
-    @IBAction func createButtonClick(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.5, animations: {
-        if self.cBackground.transform == .identity
-        {
-            //opened
-            self.createButton.transform = .identity
-            self.createButton.backgroundColor = UIColor(red: 1, green: 0.1765, blue: 0.1059, alpha: 1.0)
-            self.cBackground.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-            self.cBackground.alpha = 0
-        }
-        else{
-            //closed
-            self.cBackground.transform = .identity
-            self.createButton.transform = CGAffineTransform(rotationAngle: 45 * ( .pi / 180) )
-            self.createButton.backgroundColor = UIColor.gray
-            self.cBackground.alpha = 1
-        }
-        
-        })
-    }
-    
     @IBAction func pictureButtonClick(_ sender: UIButton) {
-        UIView.animate(withDuration: 0.3, animations: {
+        if appStatus != 1{
+            UIView.animate(withDuration: 0.3, animations: {
+                
+                self.activeIndicator.center.x = self.pictureButton.center.x
+                self.pBackGround.transform = .identity
+                
+                self.hBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
+                
+            })
             
-            self.activeIndicator.center.x = self.pictureButton.center.x
-            self.pBackGround.transform = .identity
+            let cardView = UIView(frame: CGRect(x: 5, y: 5, width: pBackGround.frame.size.width - 10, height: pBackGround.frame.size.height))
             
-            self.hBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
-            
-        })
-        
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
-            imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = .savedPhotosAlbum
+            cardView.layer.cornerRadius = 25
+            cardView.backgroundColor = UIColor(white: 1, alpha: 1)
+            cardView.clipsToBounds = true
             
             
-        }else{
-            print("读取相册错误")
+            imagePicker.view.frame = CGRect.init(x: 0, y: 0, width: cardView.frame.size.width , height: cardView.frame.size.height - 80);
+            
+            cardView.addSubview(imagePicker.view)
+            self.pBackGround.addSubview(cardView)
+            appStatus = 1
         }
-        self.addChild(imagePicker)
-        let CardView = UIView(frame: CGRect(x: 5, y: 5, width: pBackGround.frame.size.width - 10, height: pBackGround.frame.size.height))
-        
-        CardView.layer.cornerRadius = 25
-        CardView.backgroundColor = UIColor(white: 1, alpha: 1)
-        CardView.clipsToBounds = true
-        
-        imagePicker.navigationBar.isHidden = true
-        imagePicker.view.frame = CGRect.init(x: 0, y: 0, width: CardView.frame.size.width , height: CardView.frame.size.height - 80);
-        
-        CardView.addSubview(imagePicker.view)
-        self.pBackGround.addSubview(CardView)
         
     }
     
     
     @IBAction func cameraButtonClick(_ sender: UIButton) {
+        if appStatus != 2{
+            UIView.animate(withDuration: 0.3, animations: {
+                
+                self.activeIndicator.center.x = self.cameraButton.center.x
+                
+                self.pBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
+                
+                self.hBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
+                
+            })
+            appStatus = 2
+        }
+
         
-        UIView.animate(withDuration: 0.3, animations: {
-            
-            self.activeIndicator.center.x = self.cameraButton.center.x
-            
-            self.pBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
-            
-            self.hBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
-            
-        })
+    }
+    
+    @IBAction func createButtonClick(_ sender: UIButton) {
+            UIView.animate(withDuration: 0.5, animations: {
+                if self.cBackground.transform == .identity
+                {
+                    //opened
+                    self.createButton.transform = .identity
+                    self.createButton.backgroundColor = UIColor(red: 1, green: 0.1765, blue: 0.1059, alpha: 1.0)
+                    self.cBackground.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+                    self.cBackground.alpha = 0
+                }
+                else{
+                    //closed
+                    self.cBackground.transform = .identity
+                    self.createButton.transform = CGAffineTransform(rotationAngle: 45 * ( .pi / 180) )
+                    self.createButton.backgroundColor = UIColor.gray
+                    self.cBackground.alpha = 1
+                }
+                
+            })
         
     }
     
    
     @IBAction func historyButtonClick(_ sender: UIButton) {
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            
-            self.activeIndicator.center.x = self.historyButton.center.x
-            
-            self.pBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
-            
-            self.hBackGround.transform = .identity
-            
-        })
-        
+        if appStatus != 4{
+            UIView.animate(withDuration: 0.3, animations: {
+                
+                self.activeIndicator.center.x = self.historyButton.center.x
+                
+                self.pBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
+                
+                self.hBackGround.transform = .identity
+                
+            })
+            appStatus = 4
+        }
+
     }
     
     
-
+    @IBAction func settingsButtonClick(_ sender: UIButton) {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            if let secondVC = sb.instantiateViewController(withIdentifier: "SettingsVC") as? ViewControllerSettings{
+                self.present(secondVC, animated: true, completion: nil)
+                
+            }
+        
+    }
     
 
 
