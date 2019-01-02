@@ -6,11 +6,16 @@
 //  Copyright © 2018年 QRteam. All rights reserved.
 //
 
+
+
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavigationControllerDelegate {
     
+    
     //MARK:properties
+    @IBOutlet weak var camBackGround: UIView!
     
     @IBOutlet weak var ubBackGround: UIView!
     
@@ -27,7 +32,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
     @IBOutlet weak var cBackground: UIView!
     
     var imagePicker:UIImagePickerController!
-    
+    var qrCodeFrameView: UIView?
+    var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     //1:Picture 2:Camera 3:Create 4:History 5:Setting
     var appStatus = 2
     
@@ -56,7 +62,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
         }
         self.addChild(imagePicker)
         imagePicker.navigationBar.isHidden = true
-        
+       // camBackGround.insetsLayoutMarginsFromSafeArea = false
+       // camBackGround.clipsToBounds = true
+        startScanningQRCode()
     }
     
     override func viewDidLayoutSubviews() {
@@ -71,6 +79,49 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
         
         
         
+    }
+    
+    private func startScanningQRCode() {
+        // 1.创建捕捉会话
+        let session = AVCaptureSession()
+        // 2.设置输入(摄像头)
+        let device = AVCaptureDevice.default(for: AVMediaType.video)
+        guard let input = try? AVCaptureDeviceInput(device: device! ) else {
+            return
+        }
+        session.addInput(input)
+        // 3.设置输出(Metadata)
+        let output = AVCaptureMetadataOutput()
+        output.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        session.addOutput(output)
+        // 设置output的输出的类型(该类型的设置必须在添加到session之后)
+        output.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
+        
+        // 设置扫描的区域
+        let screenW = UIScreen.main.bounds.width
+        let screenH = UIScreen.main.bounds.height
+        output.rectOfInterest = CGRect(x: 0, y: 0, width: screenH, height: screenW)
+        
+        // 4.添加预览图层(可以没有)
+        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: session)
+        videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+        videoPreviewLayer?.connection?.videoOrientation = AVCaptureVideoOrientation.portrait
+        videoPreviewLayer?.frame = camBackGround.frame
+        //previewLayer.masksToBounds = true
+        
+        camBackGround.layer.insertSublayer(videoPreviewLayer!, at: 0)
+        // 5.开始扫描
+        session.startRunning()
+        
+        qrCodeFrameView = UIView()
+        
+        if let qrCodeFrameView = qrCodeFrameView {
+            qrCodeFrameView.layer.borderColor = UIColor.red.cgColor
+            qrCodeFrameView.layer.borderWidth = 3
+            qrCodeFrameView.layer.cornerRadius = 5
+            camBackGround.addSubview(qrCodeFrameView)
+            camBackGround.bringSubviewToFront(qrCodeFrameView)
+        }
     }
     
     
@@ -179,5 +230,46 @@ func setAnchorPoint(anchorPoint: CGPoint, view: UIView) {
     
     view.center = CGPoint(x: view.center.x - transition.x, y: view.center.y - transition.y)
 }
-
+    
 }
+
+    extension ViewController : AVCaptureMetadataOutputObjectsDelegate {
+     
+         
+            func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+                // Check if the metadataObjects array is not nil and it contains at least one object.
+                if metadataObjects.count == 0 {
+                    qrCodeFrameView?.frame = CGRect.zero
+                    print("No QR code is detected")
+                    return
+                }
+            
+            let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
+            
+            if metadataObj.type == AVMetadataObject.ObjectType.qr {
+                // If the found metadata is equal to the QR code metadata then update the status label's text and set the bounds
+                let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
+                qrCodeFrameView?.frame = barCodeObject!.bounds
+                
+                if metadataObj.stringValue != nil {
+                    print(metadataObj.stringValue!)
+                    
+                    
+                    let alertNormal = UIAlertController(title: "", message: metadataObj.stringValue!, preferredStyle: .alert)
+                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                    let sureAction = UIAlertAction(title: "OK", style: .destructive) { (UIAlertAction) in
+                        print("OK is clicked")
+                    }
+                    alertNormal.addAction(cancelAction);
+                    alertNormal.addAction(sureAction);
+                    self.present(alertNormal, animated: true)
+                }
+            
+            
+            
+                }}
+        
+}
+    
+    
+

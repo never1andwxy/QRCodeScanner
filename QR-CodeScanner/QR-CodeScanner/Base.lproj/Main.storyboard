@@ -134,21 +134,22 @@
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="fM8-Cd-3Ja" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="9" id="EP4-O7-VnO"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9Jd-Bh-uzf" secondAttribute="bottom" constant="40" id="ICo-yh-Xmk"/>
-                            <constraint firstItem="qQg-MB-Lvz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="9" id="Tiu-Nv-yPU"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qQg-MB-Lvz" secondAttribute="trailing" constant="9" id="Vez-9x-mRA"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="qQg-MB-Lvz" secondAttribute="bottom" constant="40" id="WBa-bx-KFF"/>
-                            <constraint firstItem="9Jd-Bh-uzf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="9" id="bP7-R8-t5b"/>
+                            <constraint firstItem="fM8-Cd-3Ja" firstAttribute="leading" secondItem="xNV-8I-PUT" secondAttribute="leading" constant="9" id="EP4-O7-VnO"/>
+                            <constraint firstItem="xNV-8I-PUT" firstAttribute="bottom" secondItem="9Jd-Bh-uzf" secondAttribute="bottom" constant="40" id="ICo-yh-Xmk"/>
+                            <constraint firstItem="qQg-MB-Lvz" firstAttribute="leading" secondItem="xNV-8I-PUT" secondAttribute="leading" constant="9" id="Tiu-Nv-yPU"/>
+                            <constraint firstItem="xNV-8I-PUT" firstAttribute="trailing" secondItem="qQg-MB-Lvz" secondAttribute="trailing" constant="9" id="Vez-9x-mRA"/>
+                            <constraint firstItem="xNV-8I-PUT" firstAttribute="bottom" secondItem="qQg-MB-Lvz" secondAttribute="bottom" constant="40" id="WBa-bx-KFF"/>
+                            <constraint firstItem="9Jd-Bh-uzf" firstAttribute="leading" secondItem="xNV-8I-PUT" secondAttribute="leading" constant="9" id="bP7-R8-t5b"/>
                             <constraint firstAttribute="bottom" secondItem="fM8-Cd-3Ja" secondAttribute="bottom" constant="9" id="ebN-Vj-Aib"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fM8-Cd-3Ja" secondAttribute="trailing" constant="9" id="hoo-in-YPK"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9Jd-Bh-uzf" secondAttribute="trailing" constant="9" id="uQS-yp-5fM"/>
+                            <constraint firstItem="xNV-8I-PUT" firstAttribute="trailing" secondItem="fM8-Cd-3Ja" secondAttribute="trailing" constant="9" id="hoo-in-YPK"/>
+                            <constraint firstItem="xNV-8I-PUT" firstAttribute="trailing" secondItem="9Jd-Bh-uzf" secondAttribute="trailing" constant="9" id="uQS-yp-5fM"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <viewLayoutGuide key="safeArea" id="xNV-8I-PUT"/>
                     </view>
                     <connections>
                         <outlet property="activeIndicator" destination="3ft-8T-9xa" id="7Js-P8-LyB"/>
                         <outlet property="cBackground" destination="CsU-th-nlL" id="Kf1-Cx-yf0"/>
+                        <outlet property="camBackGround" destination="8bC-Xf-vdC" id="zqP-XH-Fai"/>
                         <outlet property="cameraButton" destination="XF5-vg-cOc" id="gHx-QA-t9m"/>
                         <outlet property="createButton" destination="x0U-Ta-Ho0" id="1pM-qr-ALe"/>
                         <outlet property="hBackGround" destination="9Jd-Bh-uzf" id="EtN-lU-jpf"/>
@@ -185,10 +186,10 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="YCe-mw-pYB" firstAttribute="leading" secondItem="3Bs-vh-8n9" secondAttribute="leading" constant="26" id="RxT-vG-xB1"/>
-                            <constraint firstItem="YCe-mw-pYB" firstAttribute="top" secondItem="3Bs-vh-8n9" secondAttribute="top" constant="13" id="cMC-eB-4Ii"/>
+                            <constraint firstItem="YCe-mw-pYB" firstAttribute="leading" secondItem="yKB-wb-rZZ" secondAttribute="leading" constant="26" id="RxT-vG-xB1"/>
+                            <constraint firstItem="YCe-mw-pYB" firstAttribute="top" secondItem="yKB-wb-rZZ" secondAttribute="top" constant="13" id="cMC-eB-4Ii"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="3Bs-vh-8n9"/>
+                        <viewLayoutGuide key="safeArea" id="yKB-wb-rZZ"/>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="YCe-mw-pYB" id="GoU-e0-7LC"/>
