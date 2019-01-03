@@ -152,6 +152,61 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
         
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        //拿到选择完的照片
+        guard let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else
+        
+        {
+            return
+
+        }
+        //设置photo的照片
+        let detector = CIDetector(ofType: CIDetectorTypeQRCode, context:nil, options: nil)
+        
+        guard let ciImage = CIImage(image: selectedImage) else {
+            return
+        }
+        let features = detector?.features(in: ciImage)
+        var qrCodemsg=""
+        for feature in features as! [CIQRCodeFeature] {
+            qrCodemsg += feature.messageString!
+        }
+        if qrCodemsg=="" {
+            print("nothing")
+            let alert = UIAlertController(title: " ", message: "Unable to detect Qr Code" , preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title:"OK",style: .default, handler:nil ))
+            self.present(alert, animated: true , completion: nil)
+        }else{
+            print(qrCodemsg)
+            
+            UIView.animate(withDuration: 0.3, animations: {
+
+            self.activeIndicator.center.x = self.cameraButton.center.x
+            
+            self.pBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
+            
+            self.hBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
+            })
+            appStatus = 2
+            
+            
+            let alertNormal = UIAlertController(title: "", message: qrCodemsg, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let sureAction = UIAlertAction(title: "OK", style: .destructive) { (UIAlertAction) in
+                print("OK is clicked")
+            }
+            alertNormal.addAction(cancelAction);
+            alertNormal.addAction(sureAction);
+            self.present(alertNormal, animated: true)
+            
+            
+            
+            
+        }
+            
+        
+    }
+    
     
     @IBAction func cameraButtonClick(_ sender: UIButton) {
         if appStatus != 2{
