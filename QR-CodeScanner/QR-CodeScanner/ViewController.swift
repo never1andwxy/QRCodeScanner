@@ -11,13 +11,18 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavigationControllerDelegate {
+class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavigationControllerDelegate ,
+    UITextFieldDelegate {
     
     
     //MARK:properties
     @IBOutlet weak var camBackGround: UIView!
     
     @IBOutlet weak var ubBackGround: UIView!
+    
+    @IBOutlet weak var cword: UITextField!
+    
+    @IBOutlet weak var qrImage: UIImageView!
     
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var activeIndicator: UIButton!
@@ -36,7 +41,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     //1:Picture 2:Camera 3:Create 4:History 5:Setting
     var appStatus = 2
-    
+    var qrcodeImage: CIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +53,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
         
         cBackground.layer.cornerRadius = 30
         cBackground.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        
         pBackGround.layer.cornerRadius = 30
         hBackGround.layer.cornerRadius = 30
         cBackground.alpha = 0
+        
+        
         
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
             imagePicker = UIImagePickerController()
@@ -64,8 +72,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
         imagePicker.navigationBar.isHidden = true
        // camBackGround.insetsLayoutMarginsFromSafeArea = false
        // camBackGround.clipsToBounds = true
+        
+       
+        
         startScanningQRCode()
     }
+    
+   
+    
+    
+    
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -85,8 +102,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
         // 1.创建捕捉会话
         let session = AVCaptureSession()
         // 2.设置输入(摄像头)
-        let device = AVCaptureDevice.default(for: AVMediaType.video)
-        guard let input = try? AVCaptureDeviceInput(device: device! ) else {
+        guard let device = AVCaptureDevice.default(for: AVMediaType.video) else{
+            return
+        }
+        guard let input = try? AVCaptureDeviceInput(device: device ) else {
             return
         }
         session.addInput(input)
@@ -152,6 +171,50 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
         
     }
     
+    @IBAction func cwordChange(_ sender: Any) {
+        
+        
+        
+            if cword.text == "" {
+                qrImage.image = nil
+                return
+            }
+            
+            let data = cword.text!.data(using: String.Encoding.utf8, allowLossyConversion: false)
+            
+            let filter = CIFilter(name: "CIQRCodeGenerator")
+            
+            filter!.setValue(data, forKey: "inputMessage")
+            filter!.setValue("Q", forKey: "inputCorrectionLevel")
+            
+            qrcodeImage = filter!.outputImage
+            
+            let scaleX = qrImage.frame.size.width / qrcodeImage.extent.width
+            let scaleY = qrImage.frame.size.height / qrcodeImage.extent.height
+            
+            let transformedImage = qrcodeImage.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY))
+            
+            qrImage.image = UIImage(ciImage: transformedImage)
+        
+    
+        
+        
+        
+    }
+    
+    
+    @IBAction func endEdit(_ sender: Any) {
+        cword.resignFirstResponder()
+        //按return可以关闭键盘
+    }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+        //按屏幕其他地方可以关闭键盘
+    }
+    
+   
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         //拿到选择完的照片
         guard let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else
@@ -327,4 +390,5 @@ func setAnchorPoint(anchorPoint: CGPoint, view: UIView) {
 }
     
     
+
 
