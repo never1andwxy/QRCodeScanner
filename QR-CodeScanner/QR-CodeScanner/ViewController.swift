@@ -12,19 +12,9 @@ import UIKit
 import AVFoundation
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavigationControllerDelegate ,
-UITextFieldDelegate , UIActivityItemSource{
+UITextFieldDelegate {
     
-    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-        return "The pig is in the poke"
-    }
-    
-    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
-        return "The pig is in the poke"
-    }
-    
-    func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
-        return "Secret message"
-    }
+  
     
     //MARK:properties
     @IBOutlet weak var camBackGround: UIView!
@@ -72,6 +62,8 @@ UITextFieldDelegate , UIActivityItemSource{
         pBackGround.layer.cornerRadius = 30
         hBackGround.layer.cornerRadius = 30
         cBackground.alpha = 0
+        cqrShareButton.isEnabled = false
+        cqrShareButton.alpha = 0.2
         
         
         
@@ -162,13 +154,15 @@ UITextFieldDelegate , UIActivityItemSource{
     
     @IBAction func cqrShareButtonClick(_ sender: Any) {
         
-       // let scaleX = qrImage.frame.size.width / qrcodeImage.extent.width
-      //  let scaleY = qrImage.frame.size.height / qrcodeImage.extent.height
+        let scaleX = 512 / qrcodeImage.extent.width
+        let scaleY = 512 / qrcodeImage.extent.height
         
-      //  let transformedImage = qrcodeImage.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY))
+        let transformedImage = qrcodeImage.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY))
+        let ciContext = CIContext()
+        guard let cgImage = ciContext.createCGImage(transformedImage, from: transformedImage.extent) else {return }
         
-        //let items as [Any] = [ UIImage(ciImage: transformedImage)]
-        let items = [self]
+        let items : [Any] = [ UIImage(cgImage: cgImage)]
+       
         print("1")
         let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
         present(ac, animated: true)
@@ -209,6 +203,8 @@ UITextFieldDelegate , UIActivityItemSource{
         
             if cword.text == "" {
                 qrImage.image = nil
+                cqrShareButton.isEnabled = false
+                cqrShareButton.alpha = 0.2
                 return
             }
             
@@ -227,6 +223,8 @@ UITextFieldDelegate , UIActivityItemSource{
             let transformedImage = qrcodeImage.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY))
             
             qrImage.image = UIImage(ciImage: transformedImage)
+           cqrShareButton.isEnabled = true
+         cqrShareButton.alpha = 1
         
     
         
