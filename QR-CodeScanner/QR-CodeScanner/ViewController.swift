@@ -12,8 +12,19 @@ import UIKit
 import AVFoundation
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavigationControllerDelegate ,
-    UITextFieldDelegate {
+UITextFieldDelegate , UIActivityItemSource{
     
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        return "The pig is in the poke"
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+        return "The pig is in the poke"
+    }
+    
+    func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
+        return "Secret message"
+    }
     
     //MARK:properties
     @IBOutlet weak var camBackGround: UIView!
@@ -23,6 +34,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
     @IBOutlet weak var cword: UITextField!
     
     @IBOutlet weak var qrImage: UIImageView!
+    
+    @IBOutlet weak var cqrShareButton: UIButton!
     
     @IBOutlet weak var createButton: UIButton!
     @IBOutlet weak var activeIndicator: UIButton!
@@ -48,6 +61,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
         // Do any additional setup after loading the view, typically from a nib.
         ubBackGround.layer.cornerRadius = 30
         createButton.layer.cornerRadius = createButton.frame.size.width / 2
+        
+        cqrShareButton.layer.cornerRadius = cqrShareButton.frame.width / 2
         
         activeIndicator.layer.cornerRadius = activeIndicator.frame.size.width / 2
         
@@ -143,6 +158,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavi
         }
     }
     
+    
+    
+    @IBAction func cqrShareButtonClick(_ sender: Any) {
+        
+       // let scaleX = qrImage.frame.size.width / qrcodeImage.extent.width
+      //  let scaleY = qrImage.frame.size.height / qrcodeImage.extent.height
+        
+      //  let transformedImage = qrcodeImage.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY))
+        
+        //let items as [Any] = [ UIImage(ciImage: transformedImage)]
+        let items = [self]
+        print("1")
+        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        present(ac, animated: true)
+        
+        
+    }
     
     @IBAction func pictureButtonClick(_ sender: UIButton) {
         if appStatus != 1{

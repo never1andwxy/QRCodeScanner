@@ -24,6 +24,8 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Use Camera for QR-code scanning</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Save photo for QR-code image generation</string>
 	<key>UILaunchStoryboardName</key>
 	<string>Main</string>
 	<key>UIMainStoryboardFile</key>
