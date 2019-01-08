@@ -33,11 +33,18 @@ UITextFieldDelegate {
     @IBOutlet weak var hBackGround: UIView!
     @IBOutlet weak var pBackGround: UIView!
     
+    @IBOutlet weak var resultLabel: UILabel!
+    
+    @IBOutlet weak var gbkExitButton: UIButton!
+    
+    @IBOutlet weak var dqrShareButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var historyButton: UIButton!
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var pictureButton: UIButton!
     @IBOutlet weak var cBackground: UIView!
+    
+    @IBOutlet weak var dBackGround: UIView!
     
     var imagePicker:UIImagePickerController!
     var qrCodeFrameView: UIView?
@@ -49,8 +56,12 @@ UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+       dBackGround.isHidden = true
+        dBackGround.alpha = 0
+        dBackGround.layer.cornerRadius = 30
         ubBackGround.layer.cornerRadius = 30
         createButton.layer.cornerRadius = createButton.frame.size.width / 2
+        dqrShareButton.layer.cornerRadius = dqrShareButton.frame.size.width / 2
         
         cqrShareButton.layer.cornerRadius = cqrShareButton.frame.width / 2
         
@@ -88,6 +99,14 @@ UITextFieldDelegate {
    
     
     
+    @IBAction func gbkExitButtonClicked(_ sender: Any) {
+        UIView.animate(withDuration: 0.3, animations: {
+            
+            
+            self.dBackGround.alpha = 0
+        })
+        dBackGround.isHidden = true
+    }
     
     
     
@@ -145,8 +164,9 @@ UITextFieldDelegate {
             qrCodeFrameView.layer.borderColor = UIColor.red.cgColor
             qrCodeFrameView.layer.borderWidth = 3
             qrCodeFrameView.layer.cornerRadius = 5
-            camBackGround.addSubview(qrCodeFrameView)
-            camBackGround.bringSubviewToFront(qrCodeFrameView)
+            
+            camBackGround.insertSubview(qrCodeFrameView, belowSubview: pBackGround)
+            
         }
     }
     
@@ -168,6 +188,42 @@ UITextFieldDelegate {
         present(ac, animated: true)
         
         
+    }
+    
+    @IBAction func dqrShareButtonClicked(_ sender: Any) {
+        
+        
+        
+        if verifyUrl(str: resultLabel.text!)
+        {
+            let url = NSURL(string: resultLabel.text!)
+            let items : [Any] = [url!]
+            
+            let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            present(ac, animated: true)
+            
+            
+        }else
+        {
+       
+        
+        
+        
+        let items : [Any] = [ resultLabel.text!]
+        
+        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        present(ac, animated: true)
+        
+        }
+    }
+    
+    private func verifyUrl(str:String) -> Bool {
+        //创建NSURL实例
+        if let url = NSURL(string: str) {
+            //检测应用是否能打开这个NSURL实例
+            return UIApplication.shared.canOpenURL(url as URL)
+        }
+        return false
     }
     
     @IBAction func pictureButtonClick(_ sender: UIButton) {
@@ -233,6 +289,8 @@ UITextFieldDelegate {
     }
     
     
+    
+    
     @IBAction func endEdit(_ sender: Any) {
         cword.resignFirstResponder()
         //按return可以关闭键盘
@@ -283,15 +341,15 @@ UITextFieldDelegate {
             appStatus = 2
             
             
-            let alertNormal = UIAlertController(title: "", message: qrCodemsg, preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            let sureAction = UIAlertAction(title: "OK", style: .destructive) { (UIAlertAction) in
-                print("OK is clicked")
-            }
-            alertNormal.addAction(cancelAction);
-            alertNormal.addAction(sureAction);
-            self.present(alertNormal, animated: true)
+            self.dBackGround.alpha = 0
+            self.dBackGround.isHidden = false
             
+            UIView.animate(withDuration: 0.3, animations: {
+                
+                self.dBackGround.alpha = 1
+            })
+            
+            self.resultLabel.text = qrCodemsg 
             
             
             
@@ -403,14 +461,14 @@ func setAnchorPoint(anchorPoint: CGPoint, view: UIView) {
                     print(metadataObj.stringValue!)
                     
                     
-                    let alertNormal = UIAlertController(title: "", message: metadataObj.stringValue!, preferredStyle: .alert)
-                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                    let sureAction = UIAlertAction(title: "OK", style: .destructive) { (UIAlertAction) in
-                        print("OK is clicked")
-                    }
-                    alertNormal.addAction(cancelAction);
-                    alertNormal.addAction(sureAction);
-                    self.present(alertNormal, animated: true)
+                    self.dBackGround.isHidden = false
+                    
+                    UIView.animate(withDuration: 0.3, animations: {
+                        
+                        self.dBackGround.alpha = 1
+                    })
+                    
+                    self.resultLabel.text = metadataObj.stringValue!
                 }
             
             
@@ -422,3 +480,47 @@ func setAnchorPoint(anchorPoint: CGPoint, view: UIView) {
     
 
 
+final class SafariActivity: UIActivity {
+    var url: URL?
+    
+    override var activityImage: UIImage? {
+        return UIImage(named: "SafariActivity")!
+    }
+    
+    override var activityTitle: String? {
+        return NSLocalizedString("Open in Safari", comment:"")
+    }
+    
+    override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
+        for item in activityItems {
+            if
+                let url = item as? URL,
+                UIApplication.shared.canOpenURL(url)
+            {
+                return true
+            }
+        }
+        return false
+    }
+    
+    override func prepare(withActivityItems activityItems: [Any]) {
+        for item in activityItems {
+            if
+                let url = item as? URL,
+                UIApplication.shared.canOpenURL(url)
+            {
+                self.url = url
+            }
+        }
+    }
+    
+    override func perform() {
+        
+        
+        if let url = self.url {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+        
+        activityDidFinish(completed)
+    }
+}
