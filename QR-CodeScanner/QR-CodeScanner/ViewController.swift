@@ -10,6 +10,7 @@
 
 import UIKit
 import AVFoundation
+import SafariServices
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavigationControllerDelegate ,
 UITextFieldDelegate {
@@ -46,6 +47,8 @@ UITextFieldDelegate {
     
     @IBOutlet weak var dBackGround: UIView!
     
+    @IBOutlet weak var dqrSafariButton: UIButton!
+    
     var imagePicker:UIImagePickerController!
     var qrCodeFrameView: UIView?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
@@ -62,7 +65,7 @@ UITextFieldDelegate {
         ubBackGround.layer.cornerRadius = 30
         createButton.layer.cornerRadius = createButton.frame.size.width / 2
         dqrShareButton.layer.cornerRadius = dqrShareButton.frame.size.width / 2
-        
+        dqrSafariButton.layer.cornerRadius = dqrSafariButton.frame.size.width / 2
         cqrShareButton.layer.cornerRadius = cqrShareButton.frame.width / 2
         
         activeIndicator.layer.cornerRadius = activeIndicator.frame.size.width / 2
@@ -190,6 +193,8 @@ UITextFieldDelegate {
         
     }
     
+    
+    
     @IBAction func dqrShareButtonClicked(_ sender: Any) {
         
         
@@ -214,6 +219,34 @@ UITextFieldDelegate {
         let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
         present(ac, animated: true)
         
+        }
+    }
+    
+    
+    @IBAction func dqrSafariButtonClicked(_ sender: Any) {
+       
+        
+        
+        
+        if verifyUrl(str: resultLabel.text!)
+        {
+            let url = NSURL(string: resultLabel.text!)
+            let svc = SFSafariViewController(url: url! as URL)
+            present(svc, animated: true, completion: nil)
+            
+            
+        }else
+        {
+            let sanitize = resultLabel.text!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            
+
+
+            let urlori = "https://www.baidu.com/s?wd=" + sanitize!
+            
+            let url = NSURL(string: urlori)
+            let svc = SFSafariViewController(url: url! as URL)
+            present(svc, animated: true, completion: nil)
+            
         }
     }
     
@@ -478,49 +511,3 @@ func setAnchorPoint(anchorPoint: CGPoint, view: UIView) {
 }
     
     
-
-
-final class SafariActivity: UIActivity {
-    var url: URL?
-    
-    override var activityImage: UIImage? {
-        return UIImage(named: "SafariActivity")!
-    }
-    
-    override var activityTitle: String? {
-        return NSLocalizedString("Open in Safari", comment:"")
-    }
-    
-    override func canPerform(withActivityItems activityItems: [Any]) -> Bool {
-        for item in activityItems {
-            if
-                let url = item as? URL,
-                UIApplication.shared.canOpenURL(url)
-            {
-                return true
-            }
-        }
-        return false
-    }
-    
-    override func prepare(withActivityItems activityItems: [Any]) {
-        for item in activityItems {
-            if
-                let url = item as? URL,
-                UIApplication.shared.canOpenURL(url)
-            {
-                self.url = url
-            }
-        }
-    }
-    
-    override func perform() {
-        
-        
-        if let url = self.url {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        }
-        
-        activityDidFinish(completed)
-    }
-}

@@ -209,7 +209,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="taO-2Y-YFy" userLabel="Dqr Share Button">
-                                        <rect key="frame" x="143.66666666666666" y="493" width="70" height="70"/>
+                                        <rect key="frame" x="88" y="493" width="70" height="70"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="5px-uG-DuE"/>
@@ -221,16 +221,31 @@
                                             <action selector="dqrShareButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k72-2s-7in"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gxu-va-y5y" userLabel="Safari Button">
+                                        <rect key="frame" x="199" y="493" width="70" height="70"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="nL3-8x-qdM"/>
+                                            <constraint firstAttribute="height" constant="70" id="phw-W9-PmO"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" image="internet"/>
+                                        <connections>
+                                            <action selector="dqrSafariButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rwR-N3-3tR"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="waN-hr-Dc9" secondAttribute="trailing" constant="20" id="93v-Jl-9kl"/>
+                                    <constraint firstAttribute="bottom" secondItem="gxu-va-y5y" secondAttribute="bottom" constant="40" id="EVa-XA-tUg"/>
                                     <constraint firstItem="waN-hr-Dc9" firstAttribute="top" secondItem="1e9-ez-yad" secondAttribute="bottom" constant="20" id="KjQ-4q-2ln"/>
                                     <constraint firstAttribute="trailing" secondItem="1e9-ez-yad" secondAttribute="trailing" constant="10" id="P4J-WD-Q5N"/>
                                     <constraint firstItem="HkH-Qz-4ff" firstAttribute="top" secondItem="JyD-Ah-HRQ" secondAttribute="top" constant="20" id="Tyh-eK-eC8"/>
                                     <constraint firstAttribute="bottom" secondItem="taO-2Y-YFy" secondAttribute="bottom" constant="40" id="a59-N0-cQd"/>
                                     <constraint firstItem="HkH-Qz-4ff" firstAttribute="leading" secondItem="JyD-Ah-HRQ" secondAttribute="leading" constant="20" id="bst-8p-VYf"/>
-                                    <constraint firstItem="taO-2Y-YFy" firstAttribute="centerX" secondItem="JyD-Ah-HRQ" secondAttribute="centerX" id="e3q-9E-h1s"/>
+                                    <constraint firstItem="taO-2Y-YFy" firstAttribute="centerX" secondItem="JyD-Ah-HRQ" secondAttribute="centerX" constant="-55.5" id="pox-ma-Wlu"/>
+                                    <constraint firstItem="gxu-va-y5y" firstAttribute="centerX" secondItem="JyD-Ah-HRQ" secondAttribute="centerX" constant="55.5" id="uvL-Sh-WXN"/>
                                     <constraint firstItem="waN-hr-Dc9" firstAttribute="leading" secondItem="JyD-Ah-HRQ" secondAttribute="leading" constant="20" id="xl9-cd-hdN"/>
                                     <constraint firstItem="1e9-ez-yad" firstAttribute="top" secondItem="JyD-Ah-HRQ" secondAttribute="top" constant="10" id="zIy-Gl-3fQ"/>
                                 </constraints>
@@ -271,6 +286,7 @@
                         <outlet property="createButton" destination="x0U-Ta-Ho0" id="1pM-qr-ALe"/>
                         <outlet property="cword" destination="N63-8Y-Mw1" id="eIU-ko-LW6"/>
                         <outlet property="dBackGround" destination="JyD-Ah-HRQ" id="Pwq-ux-ODI"/>
+                        <outlet property="dqrSafariButton" destination="gxu-va-y5y" id="lOd-Tl-LFb"/>
                         <outlet property="dqrShareButton" destination="taO-2Y-YFy" id="3D9-S6-Ze6"/>
                         <outlet property="gbkExitButton" destination="1e9-ez-yad" id="HTu-bD-hfx"/>
                         <outlet property="hBackGround" destination="9Jd-Bh-uzf" id="EtN-lU-jpf"/>
@@ -329,6 +345,7 @@
         <image name="cross" width="25.666666030883789" height="25.666666030883789"/>
         <image name="exit" width="43" height="42"/>
         <image name="history" width="36" height="36"/>
+        <image name="internet" width="26" height="26"/>
         <image name="picture" width="36" height="36"/>
         <image name="settings" width="44" height="44"/>
         <image name="share" width="20" height="28"/>
