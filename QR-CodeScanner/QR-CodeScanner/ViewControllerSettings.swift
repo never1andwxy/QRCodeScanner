@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewControllerSettings: UIViewController {
+class ViewControllerSettings: UIViewController{
 
     @IBOutlet weak var backButton: UIButton!
     
