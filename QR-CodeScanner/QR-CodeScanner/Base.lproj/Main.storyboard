@@ -347,6 +347,29 @@
                                     <segue destination="ZYU-pk-IQK" kind="embed" id="Hqa-4X-iG0"/>
                                 </connections>
                             </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dH5-da-1kj" userLabel="CreditView">
+                                <rect key="frame" x="16" y="54" width="343" height="714"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MyM-1V-Liz" userLabel="CVExitButton">
+                                        <rect key="frame" x="289" y="10" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="ZOj-IK-Wln"/>
+                                            <constraint firstAttribute="width" constant="44" id="c4B-7u-JKd"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="0.89608304790000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button" image="exit"/>
+                                        <connections>
+                                            <action selector="cvExitButtonClicked:" destination="eBZ-nw-DuB" eventType="touchUpInside" id="Hlh-lO-zA3"/>
+                                            <action selector="gbkExitButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s3z-Fr-GnC"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="MyM-1V-Liz" firstAttribute="top" secondItem="dH5-da-1kj" secondAttribute="top" constant="10" id="HaX-1B-l2H"/>
+                                    <constraint firstAttribute="trailing" secondItem="MyM-1V-Liz" secondAttribute="trailing" constant="10" id="TaN-xh-x2X"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -354,16 +377,22 @@
                             <constraint firstItem="9pr-oa-fB6" firstAttribute="top" secondItem="yKB-wb-rZZ" secondAttribute="top" constant="13" id="Ds9-fL-79I"/>
                             <constraint firstItem="eRU-Pa-arL" firstAttribute="top" secondItem="YCe-mw-pYB" secondAttribute="bottom" constant="30" id="PbH-za-vt2"/>
                             <constraint firstItem="YCe-mw-pYB" firstAttribute="leading" secondItem="yKB-wb-rZZ" secondAttribute="leading" constant="26" id="RxT-vG-xB1"/>
+                            <constraint firstItem="yKB-wb-rZZ" firstAttribute="trailing" secondItem="dH5-da-1kj" secondAttribute="trailing" constant="16" id="T5p-T9-POX"/>
                             <constraint firstItem="yKB-wb-rZZ" firstAttribute="trailing" secondItem="eRU-Pa-arL" secondAttribute="trailing" constant="40" id="UgC-PF-lRR"/>
                             <constraint firstItem="9pr-oa-fB6" firstAttribute="centerX" secondItem="mTZ-dQ-3Iu" secondAttribute="centerX" id="WCl-D2-Nr2"/>
+                            <constraint firstItem="dH5-da-1kj" firstAttribute="leading" secondItem="yKB-wb-rZZ" secondAttribute="leading" constant="16" id="YaA-dt-ltO"/>
+                            <constraint firstItem="yKB-wb-rZZ" firstAttribute="bottom" secondItem="dH5-da-1kj" secondAttribute="bottom" constant="10" id="bMt-m4-IC4"/>
                             <constraint firstItem="eRU-Pa-arL" firstAttribute="leading" secondItem="yKB-wb-rZZ" secondAttribute="leading" constant="40" id="byk-XT-Kkm"/>
                             <constraint firstItem="YCe-mw-pYB" firstAttribute="top" secondItem="yKB-wb-rZZ" secondAttribute="top" constant="13" id="cMC-eB-4Ii"/>
                             <constraint firstItem="pzO-7s-GlP" firstAttribute="top" secondItem="eRU-Pa-arL" secondAttribute="bottom" constant="11" id="jbw-oc-ObQ"/>
+                            <constraint firstItem="dH5-da-1kj" firstAttribute="top" secondItem="yKB-wb-rZZ" secondAttribute="top" constant="10" id="vvB-43-bRN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yKB-wb-rZZ"/>
                     </view>
                     <connections>
                         <outlet property="backButton" destination="YCe-mw-pYB" id="GoU-e0-7LC"/>
+                        <outlet property="creditView" destination="dH5-da-1kj" id="e1d-v8-kUK"/>
+                        <outlet property="cvExitButton" destination="MyM-1V-Liz" id="NBg-Yv-Q50"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dzk-iU-01u" userLabel="First Responder" sceneMemberID="firstResponder"/>

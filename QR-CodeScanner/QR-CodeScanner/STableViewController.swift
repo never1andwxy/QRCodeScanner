@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 
 class STableViewController: UITableViewController {
         
@@ -21,6 +22,8 @@ class STableViewController: UITableViewController {
     }
     
 
+    
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -32,7 +35,21 @@ class STableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return 2
     }
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let myindex = indexPath.row
+        if myindex == 0{
+            
+          self.tableView.deselectRow(at: indexPath, animated: true)
+          SKStoreReviewController.requestReview()
+            
+            
+        }else{
+            self.tableView.deselectRow(at: indexPath, animated: true)
+            if let parent = self.parent as? ViewControllerSettings{
+                parent.showCreditView()}
+            
+        }
+    }
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
@@ -87,5 +104,6 @@ class STableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
     
 }

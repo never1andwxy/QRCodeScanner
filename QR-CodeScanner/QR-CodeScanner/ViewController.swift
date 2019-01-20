@@ -383,7 +383,7 @@ UITextFieldDelegate {
             })
             
             self.resultLabel.text = qrCodemsg 
-            
+            //图片扫码并显示弹窗
             
             
         }
@@ -502,6 +502,7 @@ func setAnchorPoint(anchorPoint: CGPoint, view: UIView) {
                     })
                     
                     self.resultLabel.text = metadataObj.stringValue!
+                    //相机扫码并显示弹窗
                 }
             
             

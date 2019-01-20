@@ -12,12 +12,27 @@ class ViewControllerSettings: UIViewController{
 
     @IBOutlet weak var backButton: UIButton!
     
+    
+    @IBOutlet weak var creditView: UIView!
+    
+    
+    @IBOutlet weak var cvExitButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-      
+      creditView.layer.cornerRadius = 30
+      creditView.isHidden = true
+      creditView.alpha = 0
+      creditView.backgroundColor = UIColor(white: 0, alpha: 0)
         
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = CGRect.init(x: 0, y: 0, width: creditView.frame.size.width , height: creditView.frame.size.height);
+        creditView.insertSubview(blurEffectView, belowSubview: cvExitButton)
+        
+        creditView.clipsToBounds = true
 
         // Do any additional setup after loading the view.
     }
@@ -37,6 +52,32 @@ class ViewControllerSettings: UIViewController{
             
         })
         
+        
+        
+        
+    }
+    
+    
+    
+    @IBAction func cvExitButtonClicked(_ sender: Any) {
+        UIView.animate(withDuration: 0.3, animations: {
+            
+             self.creditView.alpha = 0
+           
+           
+            
+        })
+         self.creditView.isHidden = false
+        
+    }
+    
+    func showCreditView() {
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.creditView.isHidden = false
+            self.creditView.alpha = 1
+            
+        })
         
         
         
