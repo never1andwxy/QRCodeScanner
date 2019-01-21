@@ -11,9 +11,53 @@
 import UIKit
 import AVFoundation
 import SafariServices
+import SQLite
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavigationControllerDelegate ,
-UITextFieldDelegate {
+UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return historyItemList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "history")
+        let historyitem : HistoryItem
+        historyitem = historyItemList[indexPath.row]
+        cell.textLabel?.text = historyitem.content
+        return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            
+            do{
+                let deleteitem = self.historyTable.filter(id == self.historyItemList[indexPath.row].id)
+                print(historyItemList[indexPath.row].id)
+                print(indexPath.row)
+                if try self.database.run(deleteitem.delete()) > 0 {
+                    print("deleted ")
+                } else {
+                    print("not found")
+                }
+                
+                
+                
+                
+            }catch{print("error")}
+            
+            self.historyItemList.remove(at: indexPath.row)
+            historyTableView.deleteRows(at: [indexPath], with: .fade)
+            
+            
+            
+            
+        }
+    }
+    
     
   
     
@@ -49,12 +93,26 @@ UITextFieldDelegate {
     
     @IBOutlet weak var dqrSafariButton: UIButton!
     
+    
+    @IBOutlet weak var historyTableView: UITableView!
+    
     var imagePicker:UIImagePickerController!
     var qrCodeFrameView: UIView?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     //1:Picture 2:Camera 3:Create 4:History 5:Setting
     var appStatus = 2
     var qrcodeImage: CIImage!
+    
+    var database : Connection!
+    let historyTable = Table("history")
+    let id = Expression<Int>("id")
+    let content = Expression<String>("content")
+    let scantime = Expression<String>("scantime")
+    
+    var historyItemList = [HistoryItem]()
+    
+    
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,6 +133,7 @@ UITextFieldDelegate {
         
         pBackGround.layer.cornerRadius = 30
         hBackGround.layer.cornerRadius = 30
+        hBackGround.clipsToBounds = true
         cBackground.alpha = 0
         cqrShareButton.isEnabled = false
         cqrShareButton.alpha = 0.2
@@ -94,12 +153,56 @@ UITextFieldDelegate {
        // camBackGround.insetsLayoutMarginsFromSafeArea = false
        // camBackGround.clipsToBounds = true
         
-       
+        do{
+            let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            let fileUrl = documentDirectory.appendingPathComponent("history").appendingPathExtension("sqlite3")
+            let database = try Connection(fileUrl.path)
+            self.database = database
+        }catch{
+            print(error)
+        }
         
-        startScanningQRCode()
+        
+        let createTable = self.historyTable.create { (table) in
+            table.column(self.id, primaryKey: true)
+            table.column(self.content)
+            table.column(self.scantime)
+        }
+        
+        do{
+            try self.database.run(createTable)
+            print("Created")
+        }catch{
+            print(error)
+        }
+        
+       readValues()
+       startScanningQRCode()
     }
     
-   
+    func readValues(){
+        historyItemList.removeAll()
+        
+        
+        do{
+            let historyResult = try self.database.prepare(self.historyTable.order(id.desc))
+            
+            for record in historyResult {
+                
+                
+                historyItemList.append(HistoryItem(id: record[id],content: record[content],date: record[scantime]))
+
+                
+            }
+        }catch{
+            print(error)
+        }
+        
+        
+        self.historyTableView.reloadData()
+    }
+    
+    
     
     
     @IBAction func gbkExitButtonClicked(_ sender: Any) {
@@ -385,6 +488,22 @@ UITextFieldDelegate {
             self.resultLabel.text = qrCodemsg 
             //图片扫码并显示弹窗
             
+            let formatter = DateFormatter()
+            // initially set the format based on your datepicker date / server String
+            formatter.dateFormat = "yyyy-MM-dd HH:mm"
+            
+            let timeString = formatter.string(from: Date())
+            
+            print(timeString)
+            
+            let insertHistory = self.historyTable.insert(self.content <- qrCodemsg, self.scantime <- timeString)
+            
+            do{
+                try self.database.run(insertHistory)
+                print("Inserted")
+            }catch{
+                print("error")
+            }
             
         }
             
@@ -444,9 +563,15 @@ UITextFieldDelegate {
                 
             })
             appStatus = 4
-        }
+            
+           
+                readValues()
+                
+            
+        
+        }}
 
-    }
+    
     
     
     @IBAction func settingsButtonClick(_ sender: UIButton) {
@@ -503,8 +628,27 @@ func setAnchorPoint(anchorPoint: CGPoint, view: UIView) {
                     
                     self.resultLabel.text = metadataObj.stringValue!
                     //相机扫码并显示弹窗
+                    
+                    let formatter = DateFormatter()
+                    // initially set the format based on your datepicker date / server String
+                    formatter.dateFormat = "yyyy-MM-dd HH:mm"
+                    
+                    let timeString = formatter.string(from: Date())
+                    
+                    print(timeString)
+                    
+                    let insertHistory = self.historyTable.insert(self.content <- metadataObj.stringValue!, self.scantime <- timeString)
+                    
+                    do{
+                        try self.database.run(insertHistory)
+                        print("Inserted")
+                    }catch{
+                        print("error")
+                    }
+                
+                    
                 }
-            
+                
             
             
                 }}

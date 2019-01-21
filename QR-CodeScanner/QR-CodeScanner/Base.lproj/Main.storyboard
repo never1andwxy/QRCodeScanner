@@ -24,7 +24,33 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Jd-Bh-uzf" userLabel="HBackground">
                                 <rect key="frame" x="9" y="88.333333333333314" width="357" height="649.66666666666674"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uMS-Fc-KIF">
+                                        <rect key="frame" x="0.0" y="0.0" width="357" height="604"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="history" id="NIe-86-po6">
+                                                <rect key="frame" x="0.0" y="28" width="357" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NIe-86-po6" id="4b0-4P-Uh8">
+                                                    <rect key="frame" x="0.0" y="0.0" width="357" height="43.666666666666664"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="h3h-sC-Rce"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="h7I-Kk-6hl"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="0.89608304794520544" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="uMS-Fc-KIF" firstAttribute="leading" secondItem="9Jd-Bh-uzf" secondAttribute="leading" id="GJD-32-Uyq"/>
+                                    <constraint firstAttribute="trailing" secondItem="uMS-Fc-KIF" secondAttribute="trailing" id="TZR-eX-dov"/>
+                                    <constraint firstItem="uMS-Fc-KIF" firstAttribute="top" secondItem="9Jd-Bh-uzf" secondAttribute="top" id="dE9-NO-nfP"/>
+                                    <constraint firstAttribute="bottom" secondItem="uMS-Fc-KIF" secondAttribute="bottom" constant="45.670000000000002" id="rJ4-r8-ibm"/>
+                                </constraints>
                             </view>
                             <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="fM8-Cd-3Ja">
                                 <rect key="frame" x="9" y="687" width="357" height="116"/>
@@ -291,6 +317,7 @@
                         <outlet property="gbkExitButton" destination="1e9-ez-yad" id="HTu-bD-hfx"/>
                         <outlet property="hBackGround" destination="9Jd-Bh-uzf" id="EtN-lU-jpf"/>
                         <outlet property="historyButton" destination="K1S-4k-hsc" id="m59-HL-nFn"/>
+                        <outlet property="historyTableView" destination="uMS-Fc-KIF" id="W9G-4e-0J1"/>
                         <outlet property="pBackGround" destination="qQg-MB-Lvz" id="Bgv-pv-2mw"/>
                         <outlet property="pictureButton" destination="3ON-5j-G62" id="6sI-3l-Aac"/>
                         <outlet property="qrImage" destination="ASq-QB-zvC" id="bpj-WM-gWz"/>

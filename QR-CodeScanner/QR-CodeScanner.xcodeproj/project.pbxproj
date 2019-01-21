@@ -10,6 +10,10 @@
 		1B10F6FC21C3FE5400B3ED7C /* ViewControllerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B10F6FB21C3FE5400B3ED7C /* ViewControllerSettings.swift */; };
 		1BD3DAD121E88EC500E4247A /* STableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD3DACF21E88EC500E4247A /* STableViewController.swift */; };
 		1BD3DAD221E88EC500E4247A /* STableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1BD3DAD021E88EC500E4247A /* STableViewController.xib */; };
+		1BD3DAEC21F451CE00E4247A /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD3DADE21F4517A00E4247A /* SQLite.framework */; };
+		1BD3DAED21F451EF00E4247A /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD3DADE21F4517A00E4247A /* SQLite.framework */; };
+		1BD3DAEE21F451EF00E4247A /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD3DADE21F4517A00E4247A /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1BD3DAF721F60B9300E4247A /* HistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD3DAF621F60B9300E4247A /* HistoryItem.swift */; };
 		94FD3DEC21AEB541008DE5FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FD3DEB21AEB541008DE5FE /* AppDelegate.swift */; };
 		94FD3DEE21AEB541008DE5FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FD3DED21AEB541008DE5FE /* ViewController.swift */; };
 		94FD3DF121AEB541008DE5FE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94FD3DEF21AEB541008DE5FE /* Main.storyboard */; };
@@ -20,6 +24,62 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1BD3DADD21F4517A00E4247A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BD3DAD321F4517900E4247A /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EE247AD31C3F04ED00AE3E12;
+			remoteInfo = "SQLite iOS";
+		};
+		1BD3DADF21F4517A00E4247A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BD3DAD321F4517900E4247A /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EE247ADD1C3F04ED00AE3E12;
+			remoteInfo = "SQLiteTests iOS";
+		};
+		1BD3DAE121F4517A00E4247A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BD3DAD321F4517900E4247A /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EE247B3C1C3F3ED000AE3E12;
+			remoteInfo = "SQLite Mac";
+		};
+		1BD3DAE321F4517A00E4247A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BD3DAD321F4517900E4247A /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EE247B451C3F3ED000AE3E12;
+			remoteInfo = "SQLiteTests Mac";
+		};
+		1BD3DAE521F4517A00E4247A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BD3DAD321F4517900E4247A /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 03A65E5A1C6BB0F50062603F;
+			remoteInfo = "SQLite tvOS";
+		};
+		1BD3DAE721F4517A00E4247A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BD3DAD321F4517900E4247A /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 03A65E631C6BB0F60062603F;
+			remoteInfo = "SQLiteTests tvOS";
+		};
+		1BD3DAE921F4517A00E4247A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BD3DAD321F4517900E4247A /* SQLite.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A121AC451CA35C79005A31D1;
+			remoteInfo = "SQLite watchOS";
+		};
+		1BD3DAEF21F451EF00E4247A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1BD3DAD321F4517900E4247A /* SQLite.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EE247AD21C3F04ED00AE3E12;
+			remoteInfo = "SQLite iOS";
+		};
 		94FD3DFD21AEB543008DE5FE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 94FD3DE021AEB541008DE5FE /* Project object */;
@@ -36,10 +96,26 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1BD3DAF121F451EF00E4247A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1BD3DAEE21F451EF00E4247A /* SQLite.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1B10F6FB21C3FE5400B3ED7C /* ViewControllerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerSettings.swift; sourceTree = "<group>"; };
 		1BD3DACF21E88EC500E4247A /* STableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = STableViewController.swift; sourceTree = "<group>"; };
 		1BD3DAD021E88EC500E4247A /* STableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = STableViewController.xib; sourceTree = "<group>"; };
+		1BD3DAD321F4517900E4247A /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../../../../Downloads/SQLite.swift-master/SQLite.xcodeproj"; sourceTree = "<group>"; };
+		1BD3DAF621F60B9300E4247A /* HistoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryItem.swift; sourceTree = "<group>"; };
 		94FD3DE821AEB541008DE5FE /* QR-CodeScanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QR-CodeScanner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94FD3DEB21AEB541008DE5FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		94FD3DED21AEB541008DE5FE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +136,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1BD3DAED21F451EF00E4247A /* SQLite.framework in Frameworks */,
+				1BD3DAEC21F451CE00E4247A /* SQLite.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +158,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1BD3DAD421F4517900E4247A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1BD3DADE21F4517A00E4247A /* SQLite.framework */,
+				1BD3DAE021F4517A00E4247A /* SQLiteTests iOS.xctest */,
+				1BD3DAE221F4517A00E4247A /* SQLite.framework */,
+				1BD3DAE421F4517A00E4247A /* SQLiteTests Mac.xctest */,
+				1BD3DAE621F4517A00E4247A /* SQLite.framework */,
+				1BD3DAE821F4517A00E4247A /* SQLiteTests tvOS.xctest */,
+				1BD3DAEA21F4517A00E4247A /* SQLite.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1BD3DAEB21F451CE00E4247A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		94FD3DDF21AEB541008DE5FE = {
 			isa = PBXGroup;
 			children = (
@@ -87,6 +186,8 @@
 				94FD3DFF21AEB543008DE5FE /* QR-CodeScannerTests */,
 				94FD3E0A21AEB543008DE5FE /* QR-CodeScannerUITests */,
 				94FD3DE921AEB541008DE5FE /* Products */,
+				1BD3DAD321F4517900E4247A /* SQLite.xcodeproj */,
+				1BD3DAEB21F451CE00E4247A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,6 +209,7 @@
 				94FD3DEF21AEB541008DE5FE /* Main.storyboard */,
 				1B10F6FB21C3FE5400B3ED7C /* ViewControllerSettings.swift */,
 				94FD3DF221AEB543008DE5FE /* Assets.xcassets */,
+				1BD3DAF621F60B9300E4247A /* HistoryItem.swift */,
 				94FD3DF421AEB543008DE5FE /* LaunchScreen.storyboard */,
 				94FD3DF721AEB543008DE5FE /* Info.plist */,
 				1BD3DACF21E88EC500E4247A /* STableViewController.swift */,
@@ -144,10 +246,12 @@
 				94FD3DE421AEB541008DE5FE /* Sources */,
 				94FD3DE521AEB541008DE5FE /* Frameworks */,
 				94FD3DE621AEB541008DE5FE /* Resources */,
+				1BD3DAF121F451EF00E4247A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1BD3DAF021F451EF00E4247A /* PBXTargetDependency */,
 			);
 			name = "QR-CodeScanner";
 			productName = "QR-CodeScanner";
@@ -224,6 +328,12 @@
 			mainGroup = 94FD3DDF21AEB541008DE5FE;
 			productRefGroup = 94FD3DE921AEB541008DE5FE /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1BD3DAD421F4517900E4247A /* Products */;
+					ProjectRef = 1BD3DAD321F4517900E4247A /* SQLite.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				94FD3DE721AEB541008DE5FE /* QR-CodeScanner */,
@@ -232,6 +342,58 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1BD3DADE21F4517A00E4247A /* SQLite.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SQLite.framework;
+			remoteRef = 1BD3DADD21F4517A00E4247A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1BD3DAE021F4517A00E4247A /* SQLiteTests iOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SQLiteTests iOS.xctest";
+			remoteRef = 1BD3DADF21F4517A00E4247A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1BD3DAE221F4517A00E4247A /* SQLite.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SQLite.framework;
+			remoteRef = 1BD3DAE121F4517A00E4247A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1BD3DAE421F4517A00E4247A /* SQLiteTests Mac.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SQLiteTests Mac.xctest";
+			remoteRef = 1BD3DAE321F4517A00E4247A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1BD3DAE621F4517A00E4247A /* SQLite.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SQLite.framework;
+			remoteRef = 1BD3DAE521F4517A00E4247A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1BD3DAE821F4517A00E4247A /* SQLiteTests tvOS.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "SQLiteTests tvOS.xctest";
+			remoteRef = 1BD3DAE721F4517A00E4247A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1BD3DAEA21F4517A00E4247A /* SQLite.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SQLite.framework;
+			remoteRef = 1BD3DAE921F4517A00E4247A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		94FD3DE621AEB541008DE5FE /* Resources */ = {
@@ -269,6 +431,7 @@
 				94FD3DEE21AEB541008DE5FE /* ViewController.swift in Sources */,
 				94FD3DEC21AEB541008DE5FE /* AppDelegate.swift in Sources */,
 				1B10F6FC21C3FE5400B3ED7C /* ViewControllerSettings.swift in Sources */,
+				1BD3DAF721F60B9300E4247A /* HistoryItem.swift in Sources */,
 				1BD3DAD121E88EC500E4247A /* STableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,6 +455,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1BD3DAF021F451EF00E4247A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SQLite iOS";
+			targetProxy = 1BD3DAEF21F451EF00E4247A /* PBXContainerItemProxy */;
+		};
 		94FD3DFE21AEB543008DE5FE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 94FD3DE721AEB541008DE5FE /* QR-CodeScanner */;
@@ -443,6 +611,7 @@
 		94FD3E1121AEB543008DE5FE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 45RM3H7PK3;
@@ -461,6 +630,7 @@
 		94FD3E1221AEB543008DE5FE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 45RM3H7PK3;
