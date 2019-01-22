@@ -22,13 +22,34 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "history")
+        let cell = historyTableView.dequeueReusableCell(withIdentifier: "history", for: indexPath) as UITableViewCell
         let historyitem : HistoryItem
         historyitem = historyItemList[indexPath.row]
         cell.textLabel?.text = historyitem.content
+        cell.detailTextLabel?.text = historyitem.date
+        if(verifyUrl(str: historyitem.content!))
+        {cell.imageView?.image = #imageLiteral(resourceName: "link")}else{cell.imageView?.image = #imageLiteral(resourceName: "text")}
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        self.historyTableView.deselectRow(at: indexPath, animated: true)
+        self.dBackGround.isHidden = false
+        self.resultLabel.text = historyItemList[indexPath.row].content
+        UIView.animate(withDuration: 0.3, animations: {
+            
+            self.dBackGround.alpha = 1
+        })
+        
+        
+        
+        
+    }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
@@ -111,6 +132,9 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
     
     var historyItemList = [HistoryItem]()
     
+    var lastesttime = CACurrentMediaTime()
+    var lastresult = ""
+    
     
    
     
@@ -119,6 +143,8 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
         // Do any additional setup after loading the view, typically from a nib.
        dBackGround.isHidden = true
         dBackGround.alpha = 0
+        dBackGround.backgroundColor = UIColor(white: 0.9, alpha: 0.95)
+        
         dBackGround.layer.cornerRadius = 30
         ubBackGround.layer.cornerRadius = 30
         createButton.layer.cornerRadius = createButton.frame.size.width / 2
@@ -138,6 +164,10 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
         cqrShareButton.isEnabled = false
         cqrShareButton.alpha = 0.2
         
+        
+        pBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
+        hBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
+       
         
         
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
@@ -178,6 +208,8 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
         
        readValues()
        startScanningQRCode()
+        
+        lastesttime = CACurrentMediaTime()
     }
     
     func readValues(){
@@ -221,8 +253,7 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
         
         setAnchorPoint(anchorPoint: CGPoint(x:0.5, y:1),view: pBackGround)
         setAnchorPoint(anchorPoint: CGPoint(x:0.5, y:1),view: hBackGround)
-        pBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
-        hBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
+        
         pBackGround.center.y = self.view.frame.size.height - 50
         hBackGround.center.y = self.view.frame.size.height - 50
         
@@ -616,7 +647,7 @@ func setAnchorPoint(anchorPoint: CGPoint, view: UIView) {
                 qrCodeFrameView?.frame = barCodeObject!.bounds
                 
                 if metadataObj.stringValue != nil {
-                    print(metadataObj.stringValue!)
+                  
                     
                     
                     self.dBackGround.isHidden = false
@@ -629,12 +660,17 @@ func setAnchorPoint(anchorPoint: CGPoint, view: UIView) {
                     self.resultLabel.text = metadataObj.stringValue!
                     //相机扫码并显示弹窗
                     
+                    let elapsed = CACurrentMediaTime() - lastesttime
+                    
+                    if(elapsed>5 || lastresult != metadataObj.stringValue!)
+                    
+                    {
                     let formatter = DateFormatter()
                     // initially set the format based on your datepicker date / server String
                     formatter.dateFormat = "yyyy-MM-dd HH:mm"
                     
                     let timeString = formatter.string(from: Date())
-                    
+                    print(metadataObj.stringValue!)
                     print(timeString)
                     
                     let insertHistory = self.historyTable.insert(self.content <- metadataObj.stringValue!, self.scantime <- timeString)
@@ -646,6 +682,16 @@ func setAnchorPoint(anchorPoint: CGPoint, view: UIView) {
                         print("error")
                     }
                 
+                    
+                    
+                    }
+                    
+                    lastesttime = CACurrentMediaTime()
+                    lastresult = metadataObj.stringValue!
+                    
+                    
+                    
+                    
                     
                 }
                 
