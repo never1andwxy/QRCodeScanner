@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  QR-CodeScanner
+
+  Created by Yunlu18 on 2019/1/25.
+  Copyright © 2019 QRteam. All rights reserved.
+*/
+"Generate QR Code" = "生成二維碼";
+"Please enter text here" = "請輸入需要轉換成二維碼的內容";
+"Unable to detect Qr Code" = "無法識別圖片中的二維碼";
+"https://www.google.com/search?q=" = "https://www.google.com/search?q=";
+"Rate us" = "評價我們";
+"Credits" = "開發者";
+"Change Language" = "切換語言";

@@ -12,9 +12,14 @@ import UIKit
 import AVFoundation
 import SafariServices
 import SQLite
+import Localize_Swift
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavigationControllerDelegate ,
 UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
+    
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        return true
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -117,6 +122,7 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var historyTableView: UITableView!
     
+    @IBOutlet weak var Generatelabel: UILabel!
     var imagePicker:UIImagePickerController!
     var qrCodeFrameView: UIView?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
@@ -134,6 +140,8 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
     
     var lastesttime = CACurrentMediaTime()
     var lastresult = ""
+    var UndetectString = "Unable to detect Qr Code"
+    var SearchString = "https://www.google.com/search?q="
     
     
    
@@ -144,7 +152,7 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
        dBackGround.isHidden = true
         dBackGround.alpha = 0
         dBackGround.backgroundColor = UIColor(white: 0.9, alpha: 0.95)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(setText), name: NSNotification.Name(LCLLanguageChangeNotification), object: nil)
         dBackGround.layer.cornerRadius = 30
         ubBackGround.layer.cornerRadius = 30
         createButton.layer.cornerRadius = createButton.frame.size.width / 2
@@ -154,6 +162,7 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
         
         activeIndicator.layer.cornerRadius = activeIndicator.frame.size.width / 2
         
+        setText()
         cBackground.layer.cornerRadius = 30
         cBackground.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
         
@@ -261,6 +270,14 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
         
     }
     
+    @objc func setText(){
+       Generatelabel.text = "Generate QR Code".localized()
+        cword.placeholder = "Please enter text here".localized()
+    UndetectString = "Unable to detect Qr Code".localized()
+        SearchString = "https://www.google.com/search?q=".localized()
+       
+    }
+    
     private func startScanningQRCode() {
         // 1.创建捕捉会话
         let session = AVCaptureSession()
@@ -328,6 +345,7 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
     }
     
     
+  
     
     @IBAction func dqrShareButtonClicked(_ sender: Any) {
         
@@ -375,7 +393,7 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
             
 
 
-            let urlori = "https://www.baidu.com/s?wd=" + sanitize!
+            let urlori = SearchString + sanitize!
             
             let url = NSURL(string: urlori)
             let svc = SFSafariViewController(url: url! as URL)
@@ -491,7 +509,7 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
         }
         if qrCodemsg=="" {
             print("nothing")
-            let alert = UIAlertController(title: " ", message: "Unable to detect Qr Code" , preferredStyle: .alert)
+            let alert = UIAlertController(title: UndetectString, message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title:"OK",style: .default, handler:nil ))
             self.present(alert, animated: true , completion: nil)
         }else{

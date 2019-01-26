@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  QR-CodeScanner
+
+  Created by Yunlu18 on 2019/1/25.
+  Copyright © 2019 QRteam. All rights reserved.
+*/
+"Generate QR Code" = "QRコード作成";
+"Please enter text here" = "ここで入力してください";
+"Unable to detect Qr Code" = "QRコード認識出来ませんでした";
+"https://www.google.com/search?q=" = "https://www.google.com/search?q=";
+"Rate us" = "レビュー";
+"Credits" = "クレジット";
+"Change Language" = "言語切り替え";
