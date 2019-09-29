@@ -13,6 +13,7 @@ import AVFoundation
 import SafariServices
 import SQLite
 import Localize_Swift
+import CircularRevealKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate , UINavigationControllerDelegate ,
 UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
@@ -46,6 +47,7 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
         self.historyTableView.deselectRow(at: indexPath, animated: true)
         self.dBackGround.isHidden = false
         self.resultLabel.text = historyItemList[indexPath.row].content
+        
         UIView.animate(withDuration: 0.3, animations: {
             
             self.dBackGround.alpha = 1
@@ -123,6 +125,8 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var historyTableView: UITableView!
     
     @IBOutlet weak var Generatelabel: UILabel!
+    @IBOutlet weak var Resultlabel: UILabel!
+    
     var imagePicker:UIImagePickerController!
     var qrCodeFrameView: UIView?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
@@ -154,6 +158,7 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
         dBackGround.backgroundColor = UIColor(white: 0.9, alpha: 0.95)
         NotificationCenter.default.addObserver(self, selector: #selector(setText), name: NSNotification.Name(LCLLanguageChangeNotification), object: nil)
         dBackGround.layer.cornerRadius = 30
+        
         ubBackGround.layer.cornerRadius = 30
         createButton.layer.cornerRadius = createButton.frame.size.width / 2
         dqrShareButton.layer.cornerRadius = dqrShareButton.frame.size.width / 2
@@ -164,14 +169,21 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
         
         setText()
         cBackground.layer.cornerRadius = 30
-        cBackground.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+        //cBackground.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+       // cBackground.drawAnimatedCircularMask(startFrame: CGRect(
+       //     origin: cBackground.center,
+       //     size: CGSize(
+       //         width: 0,
+       //         height: 0)), duration: 0, revealType: RevealType.unreveal)
+        cBackground.isHidden = true
         
         pBackGround.layer.cornerRadius = 30
         hBackGround.layer.cornerRadius = 30
         hBackGround.clipsToBounds = true
-        cBackground.alpha = 0
+        //cBackground.alpha = 0
         cqrShareButton.isEnabled = false
         cqrShareButton.alpha = 0.2
+        cword.font = .systemFont(ofSize: 20)
         
         
         pBackGround.transform = CGAffineTransform(scaleX: 1, y: 0.01)
@@ -268,6 +280,7 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
         
         
         
+        
     }
     
     @objc func setText(){
@@ -275,7 +288,7 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
         cword.placeholder = "Please enter text here".localized()
     UndetectString = "Unable to detect Qr Code".localized()
         SearchString = "https://www.google.com/search?q=".localized()
-       
+        Resultlabel.text = "Detected Result".localized()
     }
     
     private func startScanningQRCode() {
@@ -339,6 +352,13 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
        
         print("1")
         let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            
+            if ac.responds(to: #selector(getter: UIViewController.popoverPresentationController)) {
+                ac.popoverPresentationController?.sourceView = self.view
+                ac.popoverPresentationController?.sourceRect = cqrShareButton.frame
+            }
+        }
         present(ac, animated: true)
         
         
@@ -357,6 +377,14 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
             let items : [Any] = [url!]
             
             let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                
+                if ac.responds(to: #selector(getter: UIViewController.popoverPresentationController)) {
+                    ac.popoverPresentationController?.sourceView = self.view
+                    ac.popoverPresentationController?.sourceRect = dqrShareButton.frame
+                }
+            }
             present(ac, animated: true)
             
             
@@ -369,6 +397,14 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
         let items : [Any] = [ resultLabel.text!]
         
         let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                
+                if ac.responds(to: #selector(getter: UIViewController.popoverPresentationController)) {
+                    ac.popoverPresentationController?.sourceView = self.view
+                    ac.popoverPresentationController?.sourceRect = dqrShareButton.frame
+                }
+            }
         present(ac, animated: true)
         
         }
@@ -443,7 +479,7 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
         
         
             if cword.text == "" {
-                qrImage.image = nil
+                qrImage.image = UIImage(named:"placeholder")!
                 cqrShareButton.isEnabled = false
                 cqrShareButton.alpha = 0.2
                 return
@@ -534,7 +570,8 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
                 self.dBackGround.alpha = 1
             })
             
-            self.resultLabel.text = qrCodemsg 
+            self.resultLabel.text = qrCodemsg
+            
             //图片扫码并显示弹窗
             
             let formatter = DateFormatter()
@@ -578,24 +615,66 @@ UITextFieldDelegate  ,UITableViewDataSource, UITableViewDelegate {
     }
     
     @IBAction func createButtonClick(_ sender: UIButton) {
-            UIView.animate(withDuration: 0.5, animations: {
-                if self.cBackground.transform == .identity
+        
+               // if self.cBackground.transform == .identity
+             if self.cBackground.isHidden == false
                 {
+                    UIView.animate(withDuration: 0.5, animations: {
                     //opened
                     self.createButton.transform = .identity
                     self.createButton.backgroundColor = UIColor(red: 1, green: 0.1765, blue: 0.1059, alpha: 1.0)
-                    self.cBackground.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-                    self.cBackground.alpha = 0
+                    //self.cBackground.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+                   // self.cBackground.alpha = 0
+                        
+                        
+                        
+                    
+                    })
+                    let rect = CGRect(
+                        origin: CGPoint(
+                            x: cBackground.frame.width/2-createButton.frame.width/2,
+                            y: cBackground.frame.height/2-createButton.frame.height/2),
+                        size: CGSize(
+                            width: createButton.frame.width,
+                            height: createButton.frame.height))
+                    
+                    self.cBackground.drawAnimatedCircularMask(startFrame:
+                    rect, duration: 0.6, revealType: RevealType.unreveal){ [weak self] in
+                        self?.cBackground.isHidden = true
+                    }
+                    
+                    
                 }
                 else{
+                
+                let rect2 = CGRect(
+                    origin: CGPoint(
+                        x: cBackground.frame.width/2-createButton.frame.width/2,
+                        y: cBackground.frame.height/2-createButton.frame.height/2),
+                    size: CGSize(
+                        width: createButton.frame.width,
+                        height: createButton.frame.height))
+                
+                
+                self.cBackground.isHidden = false
+                self.cBackground.drawAnimatedCircularMask(startFrame: rect2, duration: 0.6, revealType: RevealType.reveal)
+                print(self.createButton.center.x)
+                print(self.createButton.center.y)
+                print(UIScreen.main.bounds.height)
+                
+                
+                        UIView.animate(withDuration: 0.5, animations: {
                     //closed
-                    self.cBackground.transform = .identity
+                   // self.cBackground.transform = .identity
                     self.createButton.transform = CGAffineTransform(rotationAngle: 45 * ( .pi / 180) )
                     self.createButton.backgroundColor = UIColor.gray
-                    self.cBackground.alpha = 1
+                    //self.cBackground.alpha = 1
+                           
+                        }, completion:  { finished in
+                            self.cword.becomeFirstResponder()} )
                 }
                 
-            })
+           
         
     }
     
@@ -676,6 +755,7 @@ func setAnchorPoint(anchorPoint: CGPoint, view: UIView) {
                     })
                     
                     self.resultLabel.text = metadataObj.stringValue!
+                    
                     //相机扫码并显示弹窗
                     
                     let elapsed = CACurrentMediaTime() - lastesttime

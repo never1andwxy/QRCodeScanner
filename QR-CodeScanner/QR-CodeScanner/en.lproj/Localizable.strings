@@ -6,9 +6,12 @@
   Copyright © 2019 QRteam. All rights reserved.
 */
 "Generate QR Code" = "Generate QR Code";
-"Please enter text here" = "Please enter text here";
+"Please enter text here" = "Please enter text for Generating QR Code";
 "Unable to detect Qr Code" = "Unable to detect Qr Code";
 "https://www.google.com/search?q=" = "https://www.google.com/search?q=";
 "Rate us" = "Rate us";
 "Credits" = "Credits";
 "Change Language" = "Change Language";
+"Detected Result" = "Detected Result";
+"Go to our website" = "Go to our website";
+"Privacy Policy" = "Privacy Policy";

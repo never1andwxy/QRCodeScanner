@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  QR-CodeScanner
+
+  Created by Yunlu18 on 2019/1/25.
+  Copyright © 2019 QRteam. All rights reserved.
+*/
+"Generate QR Code" = "Générer un QR code";
+"Please enter text here" = "Merci de saisir du texte pour générer un QR code";
+"Unable to detect Qr Code" = "Impossible d’identifier le code";
+"https://www.google.com/search?q=" = "https://www.google.com/search?q=";
+"Rate us" = "Nous évaluer";
+"Credits" = "Développeur";
+"Change Language" = "Modifier la langue";
+"Detected Result" = "Résultat lecture";
+"Go to our website" = "Accès au site web";
+"Privacy Policy" = "Politique de confidentialité";

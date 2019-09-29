@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Localize_Swift
 
 class ViewControllerSettings: UIViewController{
 
@@ -18,6 +19,10 @@ class ViewControllerSettings: UIViewController{
     
     @IBOutlet weak var cvExitButton: UIButton!
     
+    @IBOutlet weak var gotositeButton: UIButton!
+    
+    @IBOutlet weak var privacypolicyButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,17 +32,56 @@ class ViewControllerSettings: UIViewController{
       creditView.alpha = 0
       creditView.backgroundColor = UIColor(white: 0, alpha: 0)
         
+        gotositeButton.layer.cornerRadius = 5
+        privacypolicyButton.layer.cornerRadius = 5
+        gotositeButton.titleLabel?.textAlignment = .center
+        gotositeButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        
+        privacypolicyButton.titleLabel?.textAlignment = .center
+        privacypolicyButton.titleLabel?.adjustsFontSizeToFitWidth = true
+
+        // Do any additional setup after loading the view.
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(setText), name: NSNotification.Name(LCLLanguageChangeNotification), object: nil)
+        
+        setText()
+    }
+    @objc func setText(){
+        gotositeButton.titleLabel?.text = "Go to our website".localized()
+        privacypolicyButton.titleLabel?.text = "Privacy Policy".localized();
+        
+        
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
         let blurEffect = UIBlurEffect(style: .dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = CGRect.init(x: 0, y: 0, width: creditView.frame.size.width , height: creditView.frame.size.height);
         creditView.insertSubview(blurEffectView, belowSubview: cvExitButton)
         
         creditView.clipsToBounds = true
-
-        // Do any additional setup after loading the view.
+       blurEffectView.frame = CGRect.init(x: 0, y: 0, width: creditView.frame.size.width , height: creditView.frame.size.height);
+        
+        
+        
     }
     
-
+    
+    
+    @IBAction func privacypolicyButtonClicked(_ sender: Any) {
+        
+          UIApplication.shared.open(URL(string: "https://yunlu18.net/innovation/QRCodeProject/privacy.html")!, options: [:], completionHandler: nil)
+        
+        
+    }
+    @IBAction func gotositeButtonClicked(_ sender: Any) {
+        
+        UIApplication.shared.open(URL(string: "https://yunlu18.net/innovation/QRCodeProject/index.html")!, options: [:], completionHandler: nil)
+    }
+    
     @IBAction func backButtonClick(_ sender: UIButton) {
         
         UIView.animate(withDuration: 0.3, animations: {

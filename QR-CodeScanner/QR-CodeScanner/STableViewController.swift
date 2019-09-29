@@ -26,7 +26,7 @@ class STableViewController: UITableViewController {
     
     @IBOutlet weak var dLabel3: UILabel!
     
-    let availableLanguages = ["en","zh-Hans","ja","zh-HK"]
+    let availableLanguages = ["en","zh-Hans","ja","zh-HK","de","fr"]
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,6 +94,14 @@ class STableViewController: UITableViewController {
                 (alert: UIAlertAction) -> Void in
             })
             actionSheet.addAction(cancelAction)
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                
+                if actionSheet.responds(to: #selector(getter: UIViewController.popoverPresentationController)) {
+                    actionSheet.popoverPresentationController?.sourceView = self.view
+                    actionSheet.popoverPresentationController?.sourceRect = self.tableView.cellForRow(at: indexPath)!.frame
+
+                }
+            }
             self.present(actionSheet, animated: true, completion: nil)
             
             
